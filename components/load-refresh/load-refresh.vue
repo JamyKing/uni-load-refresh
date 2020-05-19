@@ -19,7 +19,7 @@
 				<!-- 内容 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
-				<view class="load-more" style="loadContent?'margin-bottom:0;':'margin-bottom:60rpx;'">{{loadText}}</view>
+				<view class="load-more">{{loadText}}</view>
 			</scroll-view>
 		</view>
 		
@@ -46,10 +46,6 @@
 			totalPageNo: {
 				type: Number,
 				default: 0
-			},
-			loadContent:{
-                type: Boolean,
-				default: true
 			}
 		},
 		data() {

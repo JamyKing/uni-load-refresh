@@ -1,19 +1,10 @@
 <template>
 	<view class="content">
-		<!-- <load-refresh
-			ref="loadRefresh"
-			:backgroundCover="'#F3F5F5'"
-			:pageNo="currPage"
-			:totalPageNo="totalPage" 
-			@loadMore="loadMore" 
-			@refresh="refresh">
-			<view slot="content-list"></view>
-		</load-refresh> -->
 		<load-refresh ref="loadRefresh" :backgroundCover="'#F3F5F5'" :pageNo="currPage" :totalPageNo="totalPage" @loadMore="loadMore" @refresh="refresh">
 			<view slot="content-list">
 				<view class="post-item" :class="{'u-f':item.type < 3}" v-for="(item,index) in list" :key="index">
 					<!-- 左图右文 -->
-					<block v-if="item.type === 0">
+					<block v-if="item.type === 1">
 						<view class="img-left">
 							<image :src="item.pic" mode="aspectFill" lazy-load></image>
 							<view class="shutter-one"></view>
@@ -30,7 +21,7 @@
 					</block>
 					
 					<!-- 左文右图 -->
-					<block v-if="item.type === 1">
+					<block v-if="item.type === 2">
 						<view class="text-left">
 							<view class="title-left">
 								{{item.blogDesc}}
@@ -80,10 +71,10 @@
 		},
 		data() {
 			return {
-				first: true,
+				first: true, // first值 只为方便演示 实际开发不需要
 				list: [],
-				currPage: 1, // 当前页码
-				totalPage: 2 // 总页数
+				currPage: 1, // 模拟当前页码
+				totalPage: 2 // 模拟总页数
 			}
 		},
 		onLoad() {
@@ -94,25 +85,25 @@
 				this.first = true
 				this.list = [
 					{
-						type: 0,
+						type: 1,
 						pic: '../../static/pic1.jpg',
 						blogDesc: '啦啦啦啦啦啦啦',
 						createTime: '2020-5-16'
 					},
 					{
-						type: 1,
+						type: 2,
 						pic: '../../static/pic2.jpg',
 						blogDesc: '啦啦啦啦啦啦啦',
 						createTime: '2020-5-17'
 					},
 					{
-						type: 0,
+						type: 1,
 						pic: '../../static/pic3.jpg',
 						blogDesc: '啦啦啦啦啦啦啦',
 						createTime: '2020-5-18'
 					},
 					{
-						type: 1,
+						type: 2,
 						pic: '../../static/pic4.jpg',
 						blogDesc: '啦啦啦啦啦啦啦',
 						createTime: '2020-5-19'
@@ -129,7 +120,7 @@
 					})
 					let arr = [
 						{
-							type: 0,
+							type: 1,
 							pic: '../../static/pic5.png',
 							blogDesc: '啦啦啦啦啦啦啦',
 							createTime: '2020-5-20'
@@ -149,7 +140,6 @@
 					this.$refs.loadRefresh.loadOver()
 					// 更新当前页码
 					this.currPage = 2
-					// first值 只为方便演示 实际开发不需要
 					this.first = false
 				}
 			},
@@ -170,6 +160,7 @@
 	.content {
 		height: 100%;
 		width: 100%;
+		background: #F3F5F5;
 	}
 	.u-f,.u-f-ac,.u-f-ajc{
 		display: flex;

@@ -49,8 +49,8 @@ export default {
 
 | 属性名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
-| heightReduce | Number | 0 | 裁剪高度，指该组件在整个屏幕高度 |
-| backgroundCover | String | white | 背景色 |
+| heightReduce | Number | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度) |
+| backgroundCover | String | white | 数据列表块背景色 |
 | pageNo | Number | 0 | 当前页码 |
 | totalPageNo | Number | 0 | 总页数 |
 

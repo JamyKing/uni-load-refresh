@@ -6,7 +6,7 @@
 				"navigationBarTitleText": "load-refresh 组件"
 			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "load-refresh",
