@@ -1,7 +1,5 @@
 # uni-load-refresh
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ### uni-app组件---局部下拉刷新 上划加载更多
 
    - 可以在App、H5端完美运行，小程序未测试。
