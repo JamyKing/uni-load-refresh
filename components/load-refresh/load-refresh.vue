@@ -56,7 +56,6 @@
 				loading: false,
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
-				result:'',
 				playState: 'paused'
 			}
 		},
