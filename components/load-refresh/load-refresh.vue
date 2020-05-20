@@ -1,9 +1,10 @@
 <template>
 	<view class="load-refresh">
+		<!-- 刷新动画 -->
 		<view class="refresh hollow-dots-spinner">
-		  <view class="dot" :style="[{animationPlayState: playState}]"></view>
-		  <view class="dot" :style="[{animationPlayState: playState}]"></view>
-		  <view class="dot" :style="[{animationPlayState: playState}]"></view>
+			<view class="dot" :style="[{animationPlayState: playState}]"></view>
+			<view class="dot" :style="[{animationPlayState: playState}]"></view>
+			<view class="dot" :style="[{animationPlayState: playState}]"></view>
 		</view>
 		<view
 			class="cover-container"
@@ -16,7 +17,7 @@
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend">
 			<scroll-view scroll-y show-scrollbar="true" class="list" @scrolltolower="loadMore" :style="getHeight">
-				<!-- 内容 -->
+				<!-- 数据集插槽 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
 				<view class="load-more">{{loadText}}</view>
