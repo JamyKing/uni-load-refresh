@@ -3,7 +3,7 @@
 ### uni-app组件---局部下拉刷新 上划加载更多
 
    - 可以在App、H5端完美运行，小程序未测试。
-   - 刷新动画使用了[Epic Spinners](https://epic-spinners.epicmax.co/)，也可以自己修改。
+   - 刷新动画使用了[Epic Spinners](https://epic-spinners.epicmax.co/)，也可以根据情况自定义。
 
 ## 使用方法
 
@@ -13,8 +13,8 @@
     git clone git@github.com:iRainy6661/uni-load-refresh.git
 ```
 
-  - 使用HBuilder导入项目
-  - 运行到浏览器（H5端）、App
+  - 使用HBuilderX导入项目
+  - 运行到浏览器（H5端）、App等
   
 
 #### 在 `script` 中引用组件
