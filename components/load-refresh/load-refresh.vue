@@ -23,7 +23,6 @@
 				<view class="load-more">{{loadText}}</view>
 			</scroll-view>
 		</view>
-		
 	</view>
 </template>
 
@@ -57,14 +56,17 @@
 				loading: false,
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
-				playState: 'paused'
+				playState: 'paused' // 动画的状态 暂停/开始
 			}
 		},
 		computed: {
+			// 计算组件所占屏幕高度
 			getHeight() {
 				let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
 				return `height: ${height}px;`
 			},
+			// 判断loadText
+			// 可以根据需求自定义
 			loadText() {
 				const { pageNo, totalPageNo, loading } = this
 				if (loading) {
@@ -77,6 +79,7 @@
 			}
 		},
 		watch: {
+			// 监听refresh值 避免多次触发@refresh
 			'refresh'(val) {
 				if (val) {
 					this.$emit('refresh')
@@ -84,6 +87,7 @@
 			}
 		},
 		methods: {
+			// 根据pageNo和totalPageNo的值来判断 是否触发@loadMore
 			loadMore() {
 				const { pageNo, totalPageNo } = this
 				if (pageNo < totalPageNo) {
@@ -91,9 +95,11 @@
 					this.$emit('loadMore')
 				}
 			},
+			// 单次加载结束
 			loadOver () {
 				this.loading = false
 			},
+			// 回弹效果
 			coverTouchstart(e){
 				if(pageAtTop === false){
 					return
