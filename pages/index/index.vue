@@ -39,7 +39,7 @@
 					
 					<!-- 纯图片 -->
 					<block v-if="item.type === 3">
-						<view class="img-only" :style="`background-image: url(${item.pic});`">
+						<view class="img-only" :style="{backgroundImage: 'url(' + item.pic + ')'}">
 							<view class="vague"></view>
 							<view class="user-three">
 								<image src="../../static/head.jpg" lazy-load></image>
