@@ -96,11 +96,11 @@
 				}
 			},
 			// 单次加载结束
-			loadOver () {
+			loadOver() {
 				this.loading = false
 			},
 			// 回弹效果
-			coverTouchstart(e){
+			coverTouchstart(e) {
 				if(pageAtTop === false){
 					return
 				}
@@ -108,7 +108,7 @@
 				startY = e.touches[0].clientY
 				this.playState = 'running'
 			},
-			coverTouchmove(e){
+			coverTouchmove(e) {
 				moveY = e.touches[0].clientY
 				let moveDistance = moveY - startY
 				if(moveDistance < 0){
@@ -124,7 +124,7 @@
 					this.coverTransform = `translateY(${moveDistance}px)`
 				}
 			},
-			coverTouchend(){
+			coverTouchend() {
 				setTimeout(() => {
 					if(this.moving === false){
 						return

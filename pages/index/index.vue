@@ -83,6 +83,7 @@
 		methods: {
 			loadData() {
 				this.first = true
+				this.currPage = 1
 				this.list = [
 					{
 						type: 1,
