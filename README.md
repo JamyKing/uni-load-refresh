@@ -20,7 +20,7 @@
   - 运行到浏览器（H5端）、微信小程序端、App端等
   
 #### 以H5运行结果为例：
-![refresh](http://www.jianking.vip/images/refresh.png)![loadMore](http://www.jianking.vip/images/loadMore.png)![scrollEnd](http://www.jianking.vip/images/scrollEnd.png)
+![refresh](http://www.jianking.vip/images/refresh.png) ![loadMore](http://www.jianking.vip/images/loadMore.png) ![scrollEnd](http://www.jianking.vip/images/scrollEnd.png)
 
 ## load-refresh 组件使用
 
