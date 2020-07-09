@@ -40,6 +40,8 @@ export default {
 ```
 <load-refresh
   ref="loadRefresh"
+  :isRefresh="true"
+  :refreshTime="800"
   :heightReduce="10"
   :backgroundCover="'#F3F5F5'"
   :pageNo="currPage"
@@ -56,6 +58,8 @@ export default {
 
 | 属性名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
+| isRefresh | Boolean | true | 是否开启下拉刷新功能(true: 开启; false: 关闭) |
+| refreshTime | Number | 800 | 下拉刷新时间控制(单位: 毫秒) |
 | heightReduce | Number | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度) |
 | backgroundCover | String | white | 数据列表块背景色 |
 | pageNo | Number | 0 | 当前页码 |

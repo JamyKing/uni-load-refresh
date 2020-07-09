@@ -1,7 +1,7 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画 -->
-		<view class="refresh hollow-dots-spinner">
+		<view v-if="isRefresh" class="refresh hollow-dots-spinner">
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
@@ -9,6 +9,7 @@
 		<view
 			class="cover-container"
 			:style="[{
+				marginTop: isRefresh ? '-100rpx' : '0',
 				background: backgroundCover,
 				transform: coverTransform,
 				transition: coverTransition
@@ -31,6 +32,14 @@
 	export default {
 		name: 'loadRefresh',
 		props: {
+			isRefresh: {
+				type: Boolean,
+				defaule: true
+			},
+			refreshTime: {
+				type:Number,
+				default: 800
+			},
 			heightReduce: {
 				type: Number,
 				default: 0
@@ -101,7 +110,10 @@
 			},
 			// 回弹效果
 			coverTouchstart(e) {
-				if(pageAtTop === false){
+				if (!this.isRefresh) {
+					return
+				}
+				if (pageAtTop === false) {
 					return
 				}
 				this.coverTransition = 'transform .1s linear'
@@ -109,6 +121,9 @@
 				this.playState = 'running'
 			},
 			coverTouchmove(e) {
+				if (!this.isRefresh) {
+					return
+				}
 				moveY = e.touches[0].clientY
 				let moveDistance = moveY - startY
 				if(moveDistance < 0){
@@ -125,6 +140,9 @@
 				}
 			},
 			coverTouchend() {
+				if (!this.isRefresh) {
+					return
+				}
 				setTimeout(() => {
 					if(this.moving === false){
 						return
@@ -134,7 +152,7 @@
 					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
 					this.coverTransform = 'translateY(0px)'
 					this.playState = 'paused'
-				}, 800)
+				}, this.refreshTime)
 			}
 		}
 	}
@@ -196,7 +214,6 @@
 	}
 	.cover-container{
 		width: 100%;
-		margin-top: -100rpx;
 		.list{
 			width: 100%;
 			.load-more{
