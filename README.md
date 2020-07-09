@@ -84,8 +84,8 @@ export default {
   <view class="content">
     <load-refresh
       ref="loadRefresh"
-	  :isRefresh="true"
-	  :refreshTime="800"
+      :isRefresh="true"
+      :refreshTime="800"
       :heightReduce="10"
       :backgroundCover="'#FFFFFF'"
       :pageNo="currPage"
