@@ -75,7 +75,7 @@ export default {
 #### 注意事项
 
   - 单次触发loadMore后，使用 `this.$refs.loadRefresh.loadOver()` 来结束本次加载更多。
-  - 如果对您有帮助，请鼓励支持一下，[Star](https://github.com/iRainy6661/uni-load-refresh)。
+  - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=social)](https://github.com/iRainy6661/uni-load-refresh)。
 
 #### demo用例
 
