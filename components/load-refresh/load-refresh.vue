@@ -1,7 +1,7 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画 -->
-		<view v-if="isRefresh" class="refresh hollow-dots-spinner">
+		<view class="refresh hollow-dots-spinner">
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
 			<view class="dot" :style="[{animationPlayState: playState}]"></view>
@@ -9,7 +9,6 @@
 		<view
 			class="cover-container"
 			:style="[{
-				marginTop: isRefresh ? '-100rpx' : '0',
 				background: backgroundCover,
 				transform: coverTransform,
 				transition: coverTransition
@@ -153,6 +152,20 @@
 					this.coverTransform = 'translateY(0px)'
 					this.playState = 'paused'
 				}, this.refreshTime)
+			},
+			runRefresh() {
+				// 开始
+				this.refresh = true
+				this.coverTransition = 'transform .1s linear'
+				this.coverTransform = `translateY(60px)`
+				this.playState = 'running'
+				// 结束
+				setTimeout(() => {
+					this.refresh = false
+					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
+					this.coverTransform = 'translateY(0px)'
+					this.playState = 'paused'
+				}, this.refreshTime)
 			}
 		}
 	}
@@ -214,6 +227,7 @@
 	}
 	.cover-container{
 		width: 100%;
+		margin-top: -100rpx;
 		.list{
 			width: 100%;
 			.load-more{
