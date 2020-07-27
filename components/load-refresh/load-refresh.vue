@@ -127,12 +127,9 @@
 					return
 				}
 				this.moving = true
-				if(moveDistance >= 60 && moveDistance < 100){
-					moveDistance = 60
-				}
-				if(moveDistance > 40 && moveDistance <= 60){
+				if(moveDistance >= 60){
 					this.refresh = true
-					this.coverTransform = `translateY(${moveDistance}px)`
+					this.coverTransform = `translateY(60px)`
 					this.playState = 'running'
 				}
 			},
