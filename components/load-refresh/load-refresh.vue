@@ -27,7 +27,6 @@
 </template>
 
 <script>
-	let startY = 0, moveY = 0, pageAtTop = true;
 	export default {
 		name: 'loadRefresh',
 		props: {
@@ -58,6 +57,8 @@
 		},
 		data() {
 			return {
+				startY: 0,
+				moveY: 0,
 				hasMore: true,
 				moving: false,
 				refresh: false,
@@ -112,19 +113,15 @@
 				if (!this.isRefresh) {
 					return
 				}
-				if (pageAtTop === false) {
-					return
-				}
 				this.coverTransition = 'transform .1s linear'
-				startY = e.touches[0].clientY
-				this.playState = 'running'
+				this.startY = e.touches[0].clientY
 			},
 			coverTouchmove(e) {
-				if (!this.isRefresh) {
+				if (!this.isRefresh || this.refresh) {
 					return
 				}
-				moveY = e.touches[0].clientY
-				let moveDistance = moveY - startY
+				this.moveY = e.touches[0].clientY
+				let moveDistance = this.moveY - this.startY
 				if(moveDistance < 0){
 					this.moving = false
 					return
@@ -136,10 +133,11 @@
 				if(moveDistance > 40 && moveDistance <= 60){
 					this.refresh = true
 					this.coverTransform = `translateY(${moveDistance}px)`
+					this.playState = 'running'
 				}
 			},
 			coverTouchend() {
-				if (!this.isRefresh) {
+				if (!(this.isRefresh && this.refresh)) {
 					return
 				}
 				setTimeout(() => {
