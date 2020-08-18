@@ -16,7 +16,7 @@
 			@touchstart="coverTouchstart"
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend">
-			<scroll-view scroll-y show-scrollbar="true" class="list" @scrolltolower="loadMore" :style="getHeight">
+			<scroll-view scroll-y show-scrollbar="true" class="list" :scroll-top="scrollTop" @scrolltolower="loadMore" :style="getHeight">
 				<!-- 数据集插槽 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
@@ -63,6 +63,7 @@
 				moving: false,
 				refresh: false,
 				loading: false,
+				scrollTop: -1,
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				playState: 'paused' // 动画的状态 暂停/开始
@@ -150,12 +151,14 @@
 			},
 			runRefresh() {
 				// 开始
+				this.scrollTop = 0
 				this.refresh = true
 				this.coverTransition = 'transform .1s linear'
 				this.coverTransform = `translateY(60px)`
 				this.playState = 'running'
 				// 结束
 				setTimeout(() => {
+					this.scrollTop = -1
 					this.refresh = false
 					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
 					this.coverTransform = 'translateY(0px)'
