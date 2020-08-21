@@ -83,6 +83,7 @@ export default {
 
   - 单次触发loadMore后，使用 `loadOver()` 来结束本次加载更多。
   - 使用`runRefresh()`方法，可直接通过事件触发下拉刷新。
+  - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=falt)](https://github.com/iRainy6661/uni-load-refresh)。
 
 #### demo用例
