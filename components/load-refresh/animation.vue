@@ -1,18 +1,29 @@
 <template>
-	<view class="refresh-animation">
-		<view class="hollow-dots-spinner">
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
+	<view class="content" :style="{'--color': color, '--playState': playState}">
+		<view class="refresh hollow-dots-spinner">
+			<view class="dot refresh-play"></view>
+			<view class="dot refresh-play"></view>
+			<view class="dot refresh-play"></view>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		name: 'animation',
+		props: {
+			color: {
+				type: String,
+				default: '#04C4C4'
+			},
+			playState: {
+				type: String,
+				default: 'paused'
+			}
+		},
 		data() {
 			return {
-				title: 'Hello'
+				
 			}
 		},
 		onLoad() {
@@ -25,12 +36,18 @@
 </script>
 
 <style lang="scss" scoped>
-	.refresh-animation {
+	$color: var(--color);
+	$playState: var(--playState);
+	
+	.refresh {
 		width: 100%;
 		height: 120rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	.refresh-play {
+		animation-play-state: $playState!important;
 	}
 	
 	/* HollowDotsSpinner  */
@@ -45,11 +62,11 @@
 	  width: 15px;
 	  height: 15px;
 	  margin: 0 calc(15px / 2);
-	  border: calc(15px / 5) solid #04C4C4;
+	  border: calc(15px / 5) solid $color;
 	  border-radius: 50%;
 	  float: left;
 	  transform: scale(0);
-	  animation: hollow-dots-spinner-animation 1000ms ease infinite 0ms;
+	  animation: hollowSpinner 1000ms ease infinite 0ms;
 	}
 	.hollow-dots-spinner .dot:nth-child(1) {
 	  animation-delay: calc(300ms * 1);
@@ -59,9 +76,8 @@
 	}
 	.hollow-dots-spinner .dot:nth-child(3) {
 	  animation-delay: calc(300ms * 3);
-	
 	}
-	@keyframes hollow-dots-spinner-animation {
+	@keyframes hollowSpinner {
 	  50% {
 		transform: scale(1);
 		opacity: 1;

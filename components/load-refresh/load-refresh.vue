@@ -1,11 +1,7 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画 -->
-		<view class="refresh hollow-dots-spinner">
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
-			<view class="dot" :style="[{animationPlayState: playState}]"></view>
-		</view>
+		<animation :color="color" :playState="playState"></animation>
 		<view
 			class="cover-container"
 			:style="[{
@@ -27,12 +23,16 @@
 </template>
 
 <script>
+	import animation from './animation.vue'
 	export default {
 		name: 'loadRefresh',
+		components: {
+			animation
+		},
 		props: {
 			isRefresh: {
 				type: Boolean,
-				defaule: true
+				default: true
 			},
 			refreshTime: {
 				type:Number,
@@ -41,6 +41,10 @@
 			heightReduce: {
 				type: Number,
 				default: 0
+			},
+			color: {
+				type: String,
+				default: '#04C4C4'
 			},
 			backgroundCover: {
 				type: String,
@@ -170,71 +174,22 @@
 </script>
 
 <style lang="scss" scoped>
-.load-refresh{
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	.refresh{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 120rpx;
+	.load-refresh{
+		margin: 0;
+		padding: 0;
 		width: 100%;
-	}
-	.hollow-dots-spinner, .hollow-dots-spinner * {
-	  box-sizing: border-box;
-	}
-
-	.hollow-dots-spinner {
-	  height: 100rpx;
-	  width: 100%;
-	}
-
-	.hollow-dots-spinner .dot {
-	  width: 15px;
-	  height: 15px;
-	  margin: 0 calc(15px / 2);
-	  border: calc(15px / 5) solid #04C4C4;
-	  border-radius: 50%;
-	  float: left;
-	  transform: scale(0);
-	  animation: hollow-dots-spinner-animation 1000ms ease infinite 0ms;
-	}
-
-	.hollow-dots-spinner .dot:nth-child(1) {
-	  animation-delay: calc(300ms * 1);
-	}
-
-	.hollow-dots-spinner .dot:nth-child(2) {
-	  animation-delay: calc(300ms * 2);
-	}
-
-	.hollow-dots-spinner .dot:nth-child(3) {
-	  animation-delay: calc(300ms * 3);
-
-	}
-
-	@keyframes hollow-dots-spinner-animation {
-	  50% {
-		transform: scale(1);
-		opacity: 1;
-	  }
-	  100% {
-		opacity: 0;
-	  }
-	}
-	.cover-container{
-		width: 100%;
-		margin-top: -100rpx;
-		.list{
+		.cover-container{
 			width: 100%;
-			.load-more{
-				font-size: 20rpx;
-				text-align: center;
-				color: #AAAAAA;
-				padding: 16rpx;
+			margin-top: -100rpx;
+			.list{
+				width: 100%;
+				.load-more{
+					font-size: 20rpx;
+					text-align: center;
+					color: #AAAAAA;
+					padding: 16rpx;
+				}
 			}
 		}
 	}
-}
 </style>
