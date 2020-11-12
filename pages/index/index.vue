@@ -1,13 +1,15 @@
 <template>
 	<view class="content">
 		<load-refresh ref="loadRefresh"
-			:backgroundCover="'#F3F5F5'" 
-			:pageNo="currPage" 
-			:totalPageNo="totalPage" 
-			:isRefresh="true" 
-			refreshType="hollowDots" 
-			:refreshTime="1000" 
-			@loadMore="loadMore" 
+			:isRefresh="true"
+			refreshType="hollowDots"
+			refreshTime="1000"
+			color="#04C4C4"
+			heightReduce="0"
+			:backgroundCover="'#F3F5F5'"
+			:pageNo="currPage"
+			:totalPageNo="totalPage"
+			@loadMore="loadMore"
 			@refresh="refresh">
 			<view slot="content-list">
 				<view class="post-item" :class="{'u-f':item.type < 3}" v-for="(item,index) in list" :key="index">

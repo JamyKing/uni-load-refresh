@@ -35,16 +35,16 @@
 				default: true
 			},
 			refreshTime: {
-				type:Number,
-				default: 1000
+				type: String,
+				default: '1000'
 			},
 			refreshType: {
 				type: String,
 				default: 'hollowDots'
 			},
 			heightReduce: {
-				type: Number,
-				default: 0
+				type: String,
+				default: '0'
 			},
 			color: {
 				type: String,
