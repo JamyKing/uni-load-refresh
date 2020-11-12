@@ -1,7 +1,7 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画 -->
-		<animation :color="color" :playState="playState"></animation>
+		<animation :type="refreshType" :color="color" :playState="playState"></animation>
 		<view
 			class="cover-container"
 			:style="[{
@@ -37,6 +37,10 @@
 			refreshTime: {
 				type:Number,
 				default: 800
+			},
+			refreshType: {
+				type: String,
+				default: 'hollowDots'
 			},
 			heightReduce: {
 				type: Number,

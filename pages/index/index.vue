@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<load-refresh ref="loadRefresh" :backgroundCover="'#F3F5F5'" :pageNo="currPage" :totalPageNo="totalPage" :isRefresh="true" :refreshTime="800" @loadMore="loadMore" @refresh="refresh">
+		<load-refresh ref="loadRefresh" :backgroundCover="'#F3F5F5'" :pageNo="currPage" :totalPageNo="totalPage" :isRefresh="true" refreshType="hollowDots" :refreshTime="800" @loadMore="loadMore" @refresh="refresh">
 			<view slot="content-list">
 				<view class="post-item" :class="{'u-f':item.type < 3}" v-for="(item,index) in list" :key="index">
 					<!-- 左图右文 -->
