@@ -2,7 +2,7 @@
 
 ### uni-app 组件封装---局部下拉刷新、上划加载更多
 
-**注意**： *此组件基于uni-app前端框架，可以在uni-app中直接使用，原生或者其他框架可能需要代码进行一些修改，但是组件的业务逻辑是不变的。*
+**注意**： *此组件基于uni-app前端框架，可以在uni-app中直接使用。*
   - 可以在App、H5端、微信小程序完美运行。
   - 刷新动画使用了[Epic Spinners](https://epic-spinners.epicmax.co/)，也可以根据情况自定义。
   - 组件的状态文字提醒，也可根据自身需求进行修改。
@@ -41,9 +41,11 @@ export default {
 <load-refresh
   ref="loadRefresh"
   :isRefresh="true"
-  :refreshTime="800"
-  :heightReduce="10"
-  :backgroundCover="'#F3F5F5'"
+  refreshType="hollowDots"
+  refreshTime="1000"
+  color="#04C4C4"
+  heightReduce="10"
+  backgroundCover="#F3F5F5"
   :pageNo="currPage"
   :totalPageNo="totalPage" 
   @loadMore="loadMore" 
@@ -59,8 +61,10 @@ export default {
 | 属性名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
 | isRefresh | Boolean | true | 是否开启手势下拉刷新功能(true: 开启; false: 关闭) |
-| refreshTime | Number | 800 | 下拉刷新动画时间控制(单位: 毫秒) |
-| heightReduce | Number | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度) |
+| refreshType | String | hollowDots | 刷新动画，可选类型参数(hollowDots, halfCircle, swappingSquares) |
+| refreshTime | String | 1000 | 下拉刷新动画时间控制(单位: 毫秒) |
+| color | String | #F3F5F5 | 自定义动画颜色 |
+| heightReduce | String | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度，单位：rpx) |
 | backgroundCover | String | white | 数据列表块背景色 |
 | pageNo | Number | 0 | 当前页码 |
 | totalPageNo | Number | 0 | 总页数 |
@@ -81,8 +85,8 @@ export default {
 
 #### 注意事项
 
-  - 单次触发loadMore后，使用 `loadOver()` 来结束本次加载更多。
-  - 使用`runRefresh()`方法，可直接通过事件触发下拉刷新。
+  - 注意将数据集放在插槽`slot="content-list"`中。
+  - 加载更多`loadMore()`过程中，建议在成功返回新数据后再更新`pageNo`的值。
   - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=falt)](https://github.com/iRainy6661/uni-load-refresh)。
 
@@ -93,10 +97,6 @@ export default {
   <view class="content">
     <load-refresh
       ref="loadRefresh"
-      :isRefresh="true"
-      :refreshTime="800"
-      :heightReduce="10"
-      :backgroundCover="'#FFFFFF'"
       :pageNo="currPage"
       :totalPageNo="totalPage" 
       @loadMore="loadMore" 
