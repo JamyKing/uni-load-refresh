@@ -36,7 +36,7 @@
 			},
 			refreshTime: {
 				type:Number,
-				default: 800
+				default: 1000
 			},
 			refreshType: {
 				type: String,
