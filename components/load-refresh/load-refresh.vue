@@ -1,6 +1,6 @@
 <template>
 	<view class="load-refresh">
-		<!-- 刷新动画 -->
+		<!-- 刷新动画，可自定义，占高100rpx -->
 		<animation :type="refreshType" :color="color" :playState="playState"></animation>
 		<view
 			class="cover-container"
