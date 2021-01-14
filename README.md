@@ -79,7 +79,7 @@ export default {
 | 方法名 | 说明 | 使用 |
 | ------ | ------ | ------ |
 | completed() | 刷新、加载完成(下拉刷新、加载更多 数据更新成功后必须调用) | this.$refs.loadRefresh.completed() |
-| runRefresh() | 代码触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
+| runRefresh() | 代码内触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
 
 #### Note 注意事项
 
