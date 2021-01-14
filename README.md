@@ -131,7 +131,7 @@ export default {
           // 1. list数组添加新数据
           // 2. 更新当前页码 currPage
           // 3. 调用completed()方法 this.$refs.loadRefresh.completed()
-		}, 800)
+        }, 800)
       },
       // 下拉刷新数据列表
       refresh() {
