@@ -42,7 +42,6 @@ export default {
   ref="loadRefresh"
   :isRefresh="true"
   refreshType="hollowDots"
-  refreshTime="1000"
   color="#04C4C4"
   heightReduce="10"
   backgroundCover="#F3F5F5"
@@ -56,41 +55,41 @@ export default {
 </load-refresh>
 ```
 
-#### 属性说明
+#### Props 参数说明
 
-| 属性名 | 类型 | 默认值 | 说明 |
+| 参数名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
 | isRefresh | Boolean | true | 是否开启手势下拉刷新功能(true: 开启; false: 关闭) |
 | refreshType | String | hollowDots | 刷新动画，可选类型参数(hollowDots, halfCircle, swappingSquares) |
-| refreshTime | String | 1000 | 下拉刷新动画时间控制(单位: 毫秒) |
 | color | String | #F3F5F5 | 自定义动画颜色 |
 | heightReduce | String | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度，单位：rpx) |
 | backgroundCover | String | white | 数据列表块背景色 |
 | pageNo | Number | 0 | 当前页码 |
 | totalPageNo | Number | 0 | 总页数 |
 
-#### 事件说明
+#### Events 事件说明
 
 | 事件名 | 说明 | 返回值 |
 | ------ | ------ | ------ |
 | @loadMore | 加载更多 |  |
 | @refresh | 数据列表刷新 |  |
 
-#### 组件内方法
+#### Methods 组件内方法
 
-| 方法 | 说明 | 使用 |
+| 方法名 | 说明 | 使用 |
 | ------ | ------ | ------ |
-| loadOver() | 结束单次加载更多 | this.$refs.loadRefresh.loadOver() |
-| runRefresh() | 事件触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
+| completed() | 结束动画(下拉刷新、加载更多 数据更新成功后必须调用) | this.$refs.loadRefresh.completed() |
+| runRefresh() | 代码触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
 
-#### 注意事项
+#### Note 注意事项
 
   - 注意将数据集放在插槽`slot="content-list"`中。
-  - 加载更多`loadMore()`过程中，建议在成功返回新数据后再更新`pageNo`的值。
+  - 加载更多`loadMore()`过程中，建议在请求时使用`currPage + 1`形式，成功后的**回调函数中**去更新`currPage`的值。
+  - **`@loadMore`、`@refresh`触发后，在数据请求成功后，必须调用`completed()`去结束动画。**
   - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=falt)](https://github.com/iRainy6661/uni-load-refresh)。
 
-#### demo用例
+#### Demo 示例
 
 ```
 <template>
@@ -104,7 +103,7 @@ export default {
       <view slot="content-list">
         <!-- 数据列表 -->
         <view class="dataList" v-for="(item,index) in list" :key="index">
-					
+          {{item}}
         </view>
       </view>
     </load-refresh>
@@ -121,20 +120,32 @@ export default {
       return {
         list: [], // 数据集
         currPage: 1, // 当前页码
-        totalPage: 1 // 总页数
+        totalPage: 2 // 总页数
       }
     },
     methods: {
       // 上划加载更多
       loadMore() {
-        console.log('loadMore')
-        // 请求新数据完成后调用 组件内loadOver()方法
-        // 注意更新当前页码 currPage
-        this.$refs.loadRefresh.loadOver()
+        // 模拟请求成功后的回调
+        setTimeout(() => {
+          // 1. list数组添加新数据
+          // 2. 更新当前页码 currPage
+          // 3. 调用completed()方法 this.$refs.loadRefresh.completed()
+		}, 800)
       },
       // 下拉刷新数据列表
       refresh() {
-        console.log('refresh')
+        // 模拟请求成功后的回调
+        setTimeout(() => {
+          // 1. list重新赋值，应避免 this.list = [] 这种操作
+          // 2. 更新当前页码 currPage
+          // 3. 调用completed()方法 this.$refs.loadRefresh.completed()
+        }, 1600)
+      },
+      // 后期可将loadMore()与refresh()合并成一个函数方法去处理，因为本质上这两个方法只有在list赋值上面有不同
+      // 代码触发下拉刷新方法
+      runRefresh() {
+        this.$refs.loadRefresh.runRefresh()
       }
     }
   }
