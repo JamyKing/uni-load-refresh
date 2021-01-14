@@ -71,14 +71,14 @@ export default {
 
 | 事件名 | 说明 | 返回值 |
 | ------ | ------ | ------ |
-| @loadMore | 加载更多 |  |
-| @refresh | 数据列表刷新 |  |
+| @loadMore | 上滑加载更多 |  |
+| @refresh | 下拉刷新 |  |
 
 #### Methods 组件内方法
 
 | 方法名 | 说明 | 使用 |
 | ------ | ------ | ------ |
-| completed() | 结束动画(下拉刷新、加载更多 数据更新成功后必须调用) | this.$refs.loadRefresh.completed() |
+| completed() | 刷新、加载完成(下拉刷新、加载更多 数据更新成功后必须调用) | this.$refs.loadRefresh.completed() |
 | runRefresh() | 代码触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
 
 #### Note 注意事项
