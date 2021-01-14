@@ -1,5 +1,5 @@
 <template>
-	<view class="content" :style="{'--color': color, '--playState': playState}">
+	<view class="content" :style="{'--color': color}">
 		<view v-if="type === 'hollowDots'" class="refresh hollow-dots-spinner">
 			<view class="dot"></view>
 			<view class="dot"></view>
@@ -31,8 +31,8 @@
 				default: '#04C4C4'
 			},
 			playState: {
-				type: String,
-				default: 'paused'
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -51,7 +51,7 @@
 
 <style lang="scss" scoped>
 	$color: var(--color);
-	$playState: var(--playState);
+	// $playState: var(--playState);
 	
 	.refresh {
 		width: 100%;
@@ -61,7 +61,7 @@
 		justify-content: center;
 		box-sizing: border-box;
 		view {
-			animation-play-state: $playState!important;
+			// animation-play-state: $playState!important;
 		}
 	}
 	

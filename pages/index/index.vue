@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<load-refresh ref="loadRefresh"
-			:isRefresh="true"
+			:isRefresh="false"
 			refreshType="hollowDots"
 			color="#04C4C4"
 			heightReduce="0"
@@ -69,6 +69,7 @@
 				</view>
 			</view>
 		</load-refresh>
+		<view class="fixed-bottom" @click="runRefresh">刷新</view>
 	</view>
 </template>
 
@@ -192,6 +193,9 @@
 					// 结束动画
 					this.$refs.loadRefresh.completed()
 				}, 1800)
+			},
+			runRefresh() {
+				this.$refs.loadRefresh.runRefresh()
 			}
 		}
 	}
@@ -413,5 +417,18 @@
 				left: 0;
 			}
 		}
+	}
+	.fixed-bottom {
+		position: fixed;
+		bottom: 60rpx;
+		right: 60rpx;
+		width: 100rpx;
+		height: 100rpx;
+		color: #409eff;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 100rpx;
+		box-shadow: 0 0 10rpx rgba(0,0,0,.12);
+		background-color: #FFFFFF;
 	}
 </style>

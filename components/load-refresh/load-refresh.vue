@@ -12,7 +12,7 @@
 			@touchstart="coverTouchstart"
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend">
-			<scroll-view scroll-y show-scrollbar="true" class="list" :scroll-top="scrollTop" @scrolltolower="loadMore" :style="getHeight">
+			<scroll-view scroll-y class="list" :scroll-top="scrollTop" @scrolltolower="loadMore" :style="getHeight">
 				<!-- 数据集插槽 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
@@ -69,7 +69,7 @@
 				scrollTop: -1,
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
-				playState: 'paused' // 动画的状态 暂停/开始
+				playState: false // 动画的状态 暂停 paused/开始 running
 			}
 		},
 		computed: {
@@ -114,25 +114,24 @@
 				}
 				this.moveY = e.touches[0].clientY
 				let moveDistance = this.moveY - this.startY
-				// let height = uni.upx2px(100)
-				// this.coverTransform = `translateY(${moveDistance < height ? moveDistance : height}px)`
-				if(moveDistance >= 60){
-					this.moving = true
+				this.moving = moveDistance >= 60
+				if (moveDistance >= 60) {
+					this.runRefresh()
 				}
 			},
 			coverTouchend() {
-				if (!this.isRefresh || this.updating) {
-					return
-				}
-				if (this.moving) {
-					this.runRefresh()
-				}
+				// if (!this.isRefresh || this.updating) {
+				// 	return
+				// }
+				// if (this.moving) {
+				// 	this.runRefresh()
+				// }
 			},
 			runRefresh() {
 				this.scrollTop = 0
 				this.coverTransition = 'transform .1s linear'
 				this.coverTransform = 'translateY(60px)'
-				this.playState = 'running'
+				// this.playState = true
 				this.updating = true
 				this.updateType = true
 				this.$emit('refresh')
@@ -144,7 +143,7 @@
 					this.scrollTop = -1
 					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
 					this.coverTransform = 'translateY(0px)'
-					this.playState = 'paused'
+					// this.playState = false
 				}
 				this.updating = false
 			}
