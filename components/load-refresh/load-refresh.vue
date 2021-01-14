@@ -34,10 +34,6 @@
 				type: Boolean,
 				default: true
 			},
-			refreshTime: {
-				type: String,
-				default: '1000'
-			},
 			refreshType: {
 				type: String,
 				default: 'hollowDots'
@@ -67,10 +63,9 @@
 			return {
 				startY: 0,
 				moveY: 0,
-				hasMore: true,
+				updating: false, // 数据更新状态（true: 更新中）
+				updateType: true, // 数据更新类型（true: 下拉刷新: false: 加载更多）
 				moving: false,
-				refresh: false,
-				loading: false,
 				scrollTop: -1,
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
@@ -83,11 +78,10 @@
 				let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
 				return `height: ${height}px;`
 			},
-			// 判断loadText
-			// 可以根据需求自定义
+			// 判断loadText，可以根据需求自定义
 			loadText() {
-				const { pageNo, totalPageNo, loading } = this
-				if (loading) {
+				const { pageNo, totalPageNo, updating, updateType } = this
+				if (!updateType && updating) {
 					return '加载中...'
 				} else if (pageNo < totalPageNo) {
 					return '上拉加载更多'
@@ -96,26 +90,15 @@
 				}
 			}
 		},
-		watch: {
-			// 监听refresh值 避免多次触发@refresh
-			'refresh'(val) {
-				if (val) {
-					this.$emit('refresh')
-				}
-			}
-		},
 		methods: {
 			// 根据pageNo和totalPageNo的值来判断 是否触发@loadMore
 			loadMore() {
 				const { pageNo, totalPageNo } = this
 				if (pageNo < totalPageNo) {
-					this.loading = true
+					this.updating = true
+					this.updateType = false
 					this.$emit('loadMore')
 				}
-			},
-			// 单次加载结束
-			loadOver() {
-				this.loading = false
 			},
 			// 回弹效果
 			coverTouchstart(e) {
@@ -126,52 +109,44 @@
 				this.startY = e.touches[0].clientY
 			},
 			coverTouchmove(e) {
-				if (!this.isRefresh || this.refresh) {
+				if (!this.isRefresh || this.updating) {
 					return
 				}
 				this.moveY = e.touches[0].clientY
 				let moveDistance = this.moveY - this.startY
-				if(moveDistance < 0){
-					this.moving = false
-					return
-				}
-				this.moving = true
+				// let height = uni.upx2px(100)
+				// this.coverTransform = `translateY(${moveDistance < height ? moveDistance : height}px)`
 				if(moveDistance >= 60){
-					this.refresh = true
-					this.coverTransform = `translateY(60px)`
-					this.playState = 'running'
+					this.moving = true
 				}
 			},
 			coverTouchend() {
-				if (!(this.isRefresh && this.refresh)) {
+				if (!this.isRefresh || this.updating) {
 					return
 				}
-				setTimeout(() => {
-					if(this.moving === false){
-						return
-					}
-					this.moving = false
-					this.refresh = false
-					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
-					this.coverTransform = 'translateY(0px)'
-					this.playState = 'paused'
-				}, this.refreshTime)
+				if (this.moving) {
+					this.runRefresh()
+				}
 			},
 			runRefresh() {
-				// 开始
 				this.scrollTop = 0
-				this.refresh = true
 				this.coverTransition = 'transform .1s linear'
-				this.coverTransform = `translateY(60px)`
+				this.coverTransform = 'translateY(60px)'
 				this.playState = 'running'
-				// 结束
-				setTimeout(() => {
+				this.updating = true
+				this.updateType = true
+				this.$emit('refresh')
+			},
+			completed() {
+				if (this.updateType) {
+					// 下拉刷新
+					this.moving = false
 					this.scrollTop = -1
-					this.refresh = false
 					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
 					this.coverTransform = 'translateY(0px)'
 					this.playState = 'paused'
-				}, this.refreshTime)
+				}
+				this.updating = false
 			}
 		}
 	}
