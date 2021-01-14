@@ -3,7 +3,6 @@
 		<load-refresh ref="loadRefresh"
 			:isRefresh="true"
 			refreshType="hollowDots"
-			refreshTime="1000"
 			color="#04C4C4"
 			heightReduce="0"
 			backgroundCover="#F3F5F5"
@@ -81,7 +80,6 @@
 		},
 		data() {
 			return {
-				first: true, // first值 只为方便演示 实际开发不需要
 				list: [],
 				currPage: 1, // 模拟当前页码
 				totalPage: 2 // 模拟总页数
@@ -92,8 +90,6 @@
 		},
 		methods: {
 			loadData() {
-				this.first = true
-				this.currPage = 1
 				this.list = [
 					{
 						type: 1,
@@ -123,12 +119,16 @@
 			},
 			// 加载更多
 			loadMore() {
-				if (this.first) {
-					// showToast 方便演示查看效果 实际开发中可以删除
-					uni.showToast({
-						title: '加载中',
-						icon: 'loading'
-					})
+				// showToast 方便演示查看效果 实际开发中可以删除
+				uni.showToast({
+					title: '加载中',
+					icon: 'loading'
+				})
+				// 模拟请求
+				// 建议在请求后端传值时，页码使用 currPage + 1
+				// 建议在请求成功后的回调函数中，更新赋值currPage、并使用completed()结束
+				setTimeout(() => {
+					// 模拟请求成功
 					let arr = [
 						{
 							type: 1,
@@ -142,17 +142,13 @@
 							createTime: '2020-5-21'
 						}
 					]
-					for (let item of arr) {
-						this.list.push(item)
-					}
-					uni.showToast({
-						title: '加载完毕'
-					})
-					this.$refs.loadRefresh.loadOver()
+					// 添加至list
+					this.list = [...this.list, ...arr]
 					// 更新当前页码
 					this.currPage = 2
-					this.first = false
-				}
+					// 结束动画
+					this.$refs.loadRefresh.completed()
+				}, 1000)
 			},
 			// 下拉刷新
 			refresh() {
@@ -160,8 +156,42 @@
 					title: '刷新中',
 					icon: 'loading'
 				})
-				// 重新请求数据 演示的话直接loadData
-				this.loadData()
+				// 模拟请求
+				setTimeout(() => {
+					// 模拟请求成功
+					let arr = [
+						{
+							type: 1,
+							pic: '../../static/pic1.jpg',
+							blogDesc: '啦啦啦啦啦啦啦',
+							createTime: '2020-5-16'
+						},
+						{
+							type: 2,
+							pic: '../../static/pic2.jpg',
+							blogDesc: '啦啦啦啦啦啦啦',
+							createTime: '2020-5-17'
+						},
+						{
+							type: 1,
+							pic: '../../static/pic3.jpg',
+							blogDesc: '啦啦啦啦啦啦啦',
+							createTime: '2020-5-18'
+						},
+						{
+							type: 2,
+							pic: '../../static/pic4.jpg',
+							blogDesc: '啦啦啦啦啦啦啦',
+							createTime: '2020-5-19'
+						}
+					]
+					// 添加至list
+					this.list = arr
+					// 更新当前页码
+					this.currPage = 1
+					// 结束动画
+					this.$refs.loadRefresh.completed()
+				}, 1800)
 			}
 		}
 	}
