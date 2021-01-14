@@ -43,7 +43,7 @@ export default {
   :isRefresh="true"
   refreshType="hollowDots"
   color="#04C4C4"
-  heightReduce="10"
+  heightReduce="0"
   backgroundCover="#F3F5F5"
   :pageNo="currPage"
   :totalPageNo="totalPage" 
@@ -72,7 +72,7 @@ export default {
 | 事件名 | 说明 | 返回值 |
 | ------ | ------ | ------ |
 | @loadMore | 上滑加载更多 |  |
-| @refresh | 下拉刷新 |  |
+| @refresh | 下拉列表刷新 |  |
 
 #### Methods 组件内方法
 
