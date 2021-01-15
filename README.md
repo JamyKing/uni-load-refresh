@@ -96,6 +96,7 @@ export default {
   <view class="content">
     <load-refresh
       ref="loadRefresh"
+      :isRefresh="true"
       :pageNo="currPage"
       :totalPageNo="totalPage" 
       @loadMore="loadMore" 

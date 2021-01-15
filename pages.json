@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "load-refresh 组件"
 			}
+		},
+		{
+			"path": "pages/tabs/tabs",
+			"style": {
+				"navigationBarTitleText": "tabs+swiper 全屏选项卡"
+			}
 		}
     ],
 	"globalStyle": {

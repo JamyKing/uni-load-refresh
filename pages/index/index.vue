@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<load-refresh ref="loadRefresh"
-			:isRefresh="false"
+			:isRefresh="true"
 			refreshType="hollowDots"
 			color="#04C4C4"
 			heightReduce="0"
