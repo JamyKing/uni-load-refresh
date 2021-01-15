@@ -12,7 +12,7 @@
 		</view>
 		<!-- swiper组件 -->
 		<swiper :style="getHeight" :current="tabIndex" @change="tabChange" :duration="1000">
-			<swiper-item v-for="(items, index) in tabBars" :key="index" :style="getHeight">
+			<swiper-item v-for="(items, index) in tabBars" :key="index">
 				<load-refresh
 					:ref="'loadRefresh' + index"
 					:isRefresh="true"
