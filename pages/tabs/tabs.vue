@@ -157,6 +157,7 @@
 						]
 					}
 					// list赋值
+					// Tips: 若是数组较大，建议使用 Array.push()
 					let length = tabBars[tabIndex].list.length
 					tabBars[tabIndex].list.splice(code === 10 ? length : 0, code === 10 ? 0 : length, ...newArray)
 					// 更新页码

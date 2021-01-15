@@ -81,7 +81,7 @@ export default {
 | completed() | 刷新、加载完成(下拉刷新、加载更多 数据更新成功后必须调用) | this.$refs.loadRefresh.completed() |
 | runRefresh() | 代码内触发下拉刷新 | this.$refs.loadRefresh.runRefresh() |
 
-#### Note 注意事项
+#### Notes 注意事项
 
   - 注意将数据集放在插槽`slot="content-list"`中。
   - 加载更多`loadMore()`过程中，建议在请求时使用`currPage + 1`形式，成功后的**回调函数中**去更新`currPage`的值。
@@ -90,7 +90,7 @@ export default {
   - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=falt)](https://github.com/iRainy6661/uni-load-refresh)。
 
-#### Demo 示例
+#### Demo 代码示例
 
 ```
 <template>
