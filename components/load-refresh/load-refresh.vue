@@ -21,7 +21,6 @@
 				<view class="square"></view>
 			</view>
 		</view>
-		
 		<!-- 数据列表块 -->
 		<view
 			class="cover-container"
