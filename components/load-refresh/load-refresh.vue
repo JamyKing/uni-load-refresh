@@ -3,7 +3,7 @@
 		<!-- 刷新动画，可自定义，占高100rpx -->
 		<view class="animation" :style="{'--color': color}">
 			<view v-if="!playState" class="remind">
-				{{moving ? '↑ 松开更新' : '↓ 下拉刷新'}}
+				{{moving ? '↑ 松开释放' : '↓ 下拉刷新'}}
 			</view>
 			<view v-if="playState && refreshType === 'hollowDots'" class="refresh hollow-dots-spinner">
 				<view class="dot"></view>
