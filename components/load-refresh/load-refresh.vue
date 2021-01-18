@@ -3,7 +3,7 @@
 		<!-- 刷新动画，可自定义，占高100rpx -->
 		<view class="animation" :style="{'--color': color}">
 			<view v-if="!playState" class="remind">
-				{{moving ? '松开刷新' : '下拉刷新'}}
+				{{moving ? '↑ 松开刷新' : '↓ 下拉刷新'}}
 			</view>
 			<view v-if="playState && refreshType === 'hollowDots'" class="refresh hollow-dots-spinner">
 				<view class="dot"></view>
@@ -163,7 +163,9 @@
 					this.scrollTop = -1
 					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
 					this.coverTransform = 'translateY(0px)'
-					this.playState = false
+					setTimeout(() => {
+						this.playState = false
+					}, 300)
 				}
 				this.updating = false
 			}
