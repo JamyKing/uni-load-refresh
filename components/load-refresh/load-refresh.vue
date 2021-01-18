@@ -92,6 +92,7 @@
 		computed: {
 			// 计算组件所占屏幕高度
 			getHeight() {
+				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
 				let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
 				return `height: ${height}px;`
 			},
