@@ -90,6 +90,12 @@ export default {
   - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/iRainy6661/uni-load-refresh?style=falt)](https://github.com/iRainy6661/uni-load-refresh)。
 
+#### Beta 预发测试
+
+*[v2.1-beta.0](https://github.com/iRainy6661/uni-load-refresh/releases/tag/v2.1-beta.0)* [2021/1/18]
+
+增加刷新动画前的手势交互动作，**↓ 下拉刷新** `=>` **↑ 松开释放**
+
 #### Demo 代码示例
 
 ```
