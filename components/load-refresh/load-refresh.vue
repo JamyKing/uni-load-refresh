@@ -132,10 +132,10 @@
 				}
 				this.moveY = e.touches[0].clientY
 				let moveDistance = this.moveY - this.startY
-				if (moveDistance <= 60) {
+				if (moveDistance <= 50) {
 					this.coverTransform = `translateY(${moveDistance}px)`
 				}
-				this.moving = moveDistance >= 60
+				this.moving = moveDistance >= 50
 			},
 			coverTouchend() {
 				if (!this.isRefresh || this.updating) {
@@ -151,7 +151,7 @@
 			runRefresh() {
 				this.scrollTop = 0
 				this.coverTransition = 'transform .1s linear'
-				this.coverTransform = 'translateY(60px)'
+				this.coverTransform = 'translateY(50px)'
 				this.playState = true
 				this.updating = true
 				this.updateType = true
