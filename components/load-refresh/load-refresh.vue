@@ -176,6 +176,25 @@
 <style lang="scss" scoped>
 	$color: var(--color);
 	
+	.load-refresh{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		.cover-container{
+			width: 100%;
+			margin-top: -100rpx;
+			.list{
+				width: 100%;
+				.load-more{
+					font-size: 20rpx;
+					text-align: center;
+					color: #AAAAAA;
+					padding: 16rpx;
+				}
+			}
+		}
+	}
+	
 	/* 动画 */
 	.animation {
 		width: 100%;
@@ -304,26 +323,6 @@
 		  50% {
 			transform: translate(150%,-150%) scale(2,2);
 		  }
-		}
-	}
-	
-	/* 列表 */
-	.load-refresh{
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		.cover-container{
-			width: 100%;
-			margin-top: -100rpx;
-			.list{
-				width: 100%;
-				.load-more{
-					font-size: 20rpx;
-					text-align: center;
-					color: #AAAAAA;
-					padding: 16rpx;
-				}
-			}
 		}
 	}
 </style>
