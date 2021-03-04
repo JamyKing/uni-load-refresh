@@ -54,6 +54,10 @@
 				type: String,
 				default: 'hollowDots'
 			},
+			fixedHeight: {
+				type: String,
+				default: ''
+			},
 			heightReduce: {
 				type: String,
 				default: '0'
@@ -92,8 +96,12 @@
 			// 计算组件所占屏幕高度
 			getHeight() {
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
-				let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
-				return `height: ${height}px;`
+				if (this.fixedHeight) {
+					return `height: ${this.fixedHeight}rpx;`
+				} else {
+					let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
+					return `height: ${height}px;`
+				}
 			},
 			// 判断loadText，可以根据需求自定义
 			loadText() {
