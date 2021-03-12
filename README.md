@@ -62,7 +62,8 @@ export default {
 | isRefresh | Boolean | true | 是否开启手势下拉刷新功能(true: 开启; false: 关闭) |
 | refreshType | String | hollowDots | 刷新动画，可选类型参数(hollowDots, halfCircle, swappingSquares) |
 | color | String | #F3F5F5 | 自定义动画颜色 |
-| heightReduce | String | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度，单位：rpx) |
+| fixedHeight | String | 0 | 固定高度(优先级：fixedHeight > heightReduce；适用于确定组件容器高度的情况下；单位：rpx) |
+| heightReduce | String | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度；适用于不确定组件容器高度，欲撑满屏幕；单位：rpx) |
 | backgroundCover | String | white | 数据列表块背景色 |
 | pageNo | Number | 0 | 当前页码 |
 | totalPageNo | Number | 0 | 总页数 |

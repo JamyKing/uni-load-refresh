@@ -4,7 +4,6 @@
 			:isRefresh="true"
 			refreshType="hollowDots"
 			color="#04C4C4"
-			heightReduce="0"
 			backgroundCover="#F3F5F5"
 			:pageNo="currPage"
 			:totalPageNo="totalPage"

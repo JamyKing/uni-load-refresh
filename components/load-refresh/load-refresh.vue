@@ -54,6 +54,10 @@
 				type: String,
 				default: 'hollowDots'
 			},
+			fixedHeight: {
+				type: String,
+				default: '0'
+			},
 			heightReduce: {
 				type: String,
 				default: '0'
@@ -92,8 +96,12 @@
 			// 计算组件所占屏幕高度
 			getHeight() {
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
-				let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
-				return `height: ${height}px;`
+				if (Number(this.fixedHeight)) {
+					return `height: ${this.fixedHeight}rpx;`
+				} else {
+					let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
+					return `height: ${height}px;`
+				}
 			},
 			// 判断loadText，可以根据需求自定义
 			loadText() {
@@ -175,6 +183,25 @@
 
 <style lang="scss" scoped>
 	$color: var(--color);
+	
+	.load-refresh{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		.cover-container{
+			width: 100%;
+			margin-top: -100rpx;
+			.list{
+				width: 100%;
+				.load-more{
+					font-size: 20rpx;
+					text-align: center;
+					color: #AAAAAA;
+					padding: 16rpx;
+				}
+			}
+		}
+	}
 	
 	/* 动画 */
 	.animation {
@@ -304,26 +331,6 @@
 		  50% {
 			transform: translate(150%,-150%) scale(2,2);
 		  }
-		}
-	}
-	
-	/* 列表 */
-	.load-refresh{
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		.cover-container{
-			width: 100%;
-			margin-top: -100rpx;
-			.list{
-				width: 100%;
-				.load-more{
-					font-size: 20rpx;
-					text-align: center;
-					color: #AAAAAA;
-					padding: 16rpx;
-				}
-			}
 		}
 	}
 </style>
