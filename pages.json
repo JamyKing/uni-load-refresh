@@ -13,6 +13,22 @@
 			}
 		}
     ],
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#00aaff",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [
+			{
+				"text": "load-refresh",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"text": "tabs-swiper",
+				"pagePath": "pages/tabs/tabs"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "load-refresh",
