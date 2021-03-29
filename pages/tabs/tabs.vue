@@ -18,8 +18,8 @@
 					:isRefresh="true"
 					heightReduce="80"
 					backgroundCover="#F3F5F5"
-					:pageNo="items.pageNo"
-					:totalPageNo="items.totalPage"
+					:currentPage="items.currentPage"
+					:totalPages="items.totalPages"
 					@loadMore="loadData(10)"
 					@refresh="loadData(20)">
 					<view slot="content-list">
@@ -46,8 +46,8 @@
 				tabBars: [
 					{
 						name: '未发货',
-						pageNo: 1,
-						totalPage: 2,
+						currentPage: 1,
+						totalPages: 2,
 						list: [
 							{
 								text: 'hello啊',
@@ -69,8 +69,8 @@
 					},
 					{
 						name: '已发货',
-						pageNo: 1,
-						totalPage: 2,
+						currentPage: 1,
+						totalPages: 2,
 						list: [
 							{
 								text: 'hello啊',
@@ -161,7 +161,7 @@
 					let length = tabBars[tabIndex].list.length
 					tabBars[tabIndex].list.splice(code === 10 ? length : 0, code === 10 ? 0 : length, ...newArray)
 					// 更新页码
-					tabBars[tabIndex].pageNo = code === 10 ? 2 : 1
+					tabBars[tabIndex].currentPage = code === 10 ? 2 : 1
 					// 数据更新完成
 					this.$refs['loadRefresh' + tabIndex][0].completed()
 				}, 1000)

@@ -70,11 +70,11 @@
 				type: String,
 				default: 'white'
 			},
-			pageNo: {
+			currentPage: {
 				type: Number,
 				default: 0
 			},
-			totalPageNo: {
+			totalPages: {
 				type: Number,
 				default: 0
 			}
@@ -105,10 +105,10 @@
 			},
 			// 判断loadText，可以根据需求自定义
 			loadText() {
-				const { pageNo, totalPageNo, updating, updateType } = this
+				const { currentPage, totalPages, updating, updateType } = this
 				if (!updateType && updating) {
 					return '加载中...'
-				} else if (pageNo < totalPageNo) {
+				} else if (currentPage < totalPages) {
 					return '上拉加载更多'
 				} else {
 					return '已经到底啦~'
@@ -116,10 +116,10 @@
 			}
 		},
 		methods: {
-			// 根据pageNo和totalPageNo的值来判断 是否触发@loadMore
+			// 根据currentPage和totalPages的值来判断 是否触发@loadMore
 			loadMore() {
-				const { pageNo, totalPageNo } = this
-				if (pageNo < totalPageNo) {
+				const { currentPage, totalPages } = this
+				if (currentPage < totalPages) {
 					this.updating = true
 					this.updateType = false
 					this.$emit('loadMore')

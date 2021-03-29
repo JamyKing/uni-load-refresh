@@ -45,8 +45,8 @@ export default {
   color="#04C4C4"
   heightReduce="0"
   backgroundCover="#F3F5F5"
-  :pageNo="currPage"
-  :totalPageNo="totalPage" 
+  :currentPage="currentPage"
+  :totalPages="totalPages" 
   @loadMore="loadMore" 
   @refresh="refresh">
   <view slot="content-list">
@@ -65,8 +65,8 @@ export default {
 | fixedHeight | String | 0 | 固定高度(优先级：fixedHeight > heightReduce；适用于确定组件容器高度的情况下；单位：rpx) |
 | heightReduce | String | 0 | 裁剪高度(在整个屏幕高度中除该组件外，其余部分占据的高度；适用于不确定组件容器高度，欲撑满屏幕；单位：rpx) |
 | backgroundCover | String | white | 数据列表块背景色 |
-| pageNo | Number | 0 | 当前页码 |
-| totalPageNo | Number | 0 | 总页数 |
+| currentPage | Number | 0 | 当前页码 |
+| totalPages | Number | 0 | 总页码 |
 
 #### Events 事件说明
 
@@ -85,7 +85,7 @@ export default {
 #### Notes 注意事项
 
   - 注意将数据集放在插槽`slot="content-list"`中。
-  - 加载更多`loadMore()`过程中，建议在请求时使用`currPage + 1`形式，成功后的**回调函数中**去更新`currPage`的值。
+  - 加载更多`loadMore()`过程中，建议在请求时使用`currentPage + 1`形式，成功后的**回调函数中**去更新`currentPage`的值。
   - **`@loadMore`、`@refresh`触发后，在数据请求成功后，必须调用`completed()`去结束动画。**
   - 如有需要使用组件实现`tabsSwiper`**全屏选项卡**功能，可参考[tabsSwiper](https://github.com/iRainy6661/uni-load-refresh/blob/master/pages/tabs/tabs.vue)。
   - 使用出现问题可参考[常见问题汇总](https://github.com/iRainy6661/uni-load-refresh/issues/2)
@@ -99,8 +99,8 @@ export default {
     <load-refresh
       ref="loadRefresh"
       :isRefresh="true"
-      :pageNo="currPage"
-      :totalPageNo="totalPage" 
+      :currentPage="currentPage"
+      :totalPages="totalPages" 
       @loadMore="loadMore" 
       @refresh="refresh">
       <view slot="content-list">
@@ -122,8 +122,8 @@ export default {
     data() {
       return {
         list: [], // 数据集
-        currPage: 1, // 当前页码
-        totalPage: 2 // 总页数
+        currentPage: 1, // 当前页码
+        totalPages: 2 // 总页数
       }
     },
     methods: {
@@ -132,7 +132,7 @@ export default {
         // 模拟请求成功后的回调
         setTimeout(() => {
           // 1. list数组添加新数据
-          // 2. 更新当前页码 currPage
+          // 2. 更新当前页码 currentPage
           // 3. 调用completed()方法 this.$refs.loadRefresh.completed()
         }, 800)
       },
@@ -141,7 +141,7 @@ export default {
         // 模拟请求成功后的回调
         setTimeout(() => {
           // 1. list重新赋值，应避免 this.list = [] 这种操作
-          // 2. 更新当前页码 currPage
+          // 2. 更新当前页码 currentPage
           // 3. 调用completed()方法 this.$refs.loadRefresh.completed()
         }, 1600)
       },

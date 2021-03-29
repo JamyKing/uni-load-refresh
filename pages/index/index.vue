@@ -5,8 +5,8 @@
 			refreshType="hollowDots"
 			color="#04C4C4"
 			backgroundCover="#F3F5F5"
-			:pageNo="currPage"
-			:totalPageNo="totalPage"
+			:currentPage="currentPage"
+			:totalPages="totalPages"
 			@loadMore="loadMore"
 			@refresh="refresh">
 			<view slot="content-list">
@@ -81,8 +81,8 @@
 		data() {
 			return {
 				list: [],
-				currPage: 1, // 模拟当前页码
-				totalPage: 2 // 模拟总页数
+				currentPage: 1, // 模拟当前页码
+				totalPages: 2 // 模拟总页数
 			}
 		},
 		onLoad() {
@@ -125,8 +125,8 @@
 					icon: 'loading'
 				})
 				// 模拟请求
-				// 建议在请求后端传值时，页码使用 currPage + 1
-				// 建议在请求成功后的回调函数中，更新赋值currPage、并使用completed()结束
+				// 建议在请求后端传值时，页码使用 currentPage + 1
+				// 建议在请求成功后的回调函数中，更新赋值currentPage、并使用completed()结束
 				setTimeout(() => {
 					// 模拟请求成功
 					let arr = [
@@ -145,7 +145,7 @@
 					// 添加至list
 					this.list = [...this.list, ...arr]
 					// 更新当前页码
-					this.currPage = 2
+					this.currentPage = 2
 					// 结束动画
 					this.$refs.loadRefresh.completed()
 				}, 1000)
@@ -188,7 +188,7 @@
 					// 添加至list
 					this.list = arr
 					// 更新当前页码
-					this.currPage = 1
+					this.currentPage = 1
 					// 结束动画
 					this.$refs.loadRefresh.completed()
 				}, 1800)
