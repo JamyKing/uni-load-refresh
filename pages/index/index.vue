@@ -419,7 +419,7 @@
 	}
 	.fixed-bottom {
 		position: fixed;
-		bottom: 60rpx;
+		bottom: 120rpx;
 		right: 60rpx;
 		width: 100rpx;
 		height: 100rpx;
