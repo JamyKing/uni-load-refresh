@@ -119,7 +119,7 @@
 			// 根据currentPage和totalPages的值来判断 是否触发@loadMore
 			loadMore() {
 				const { currentPage, totalPages } = this
-				if (!updating && currentPage < totalPages) {
+				if (!this.updating && currentPage < totalPages) {
 					this.updating = true
 					this.updateType = false
 					this.$emit('loadMore')
