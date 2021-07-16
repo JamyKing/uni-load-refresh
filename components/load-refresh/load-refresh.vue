@@ -22,23 +22,16 @@
 			</view>
 		</view>
 		<!-- 数据列表块 -->
-		<scroll-view class="scroll-box" scroll-y :scroll-top="scrollTop" @scroll="conentScroll" @scrolltolower="loadMore" :style="getHeight">
-			<view
-				class="cover-container"
-				:style="[{
-					background: backgroundCover,
-					transform: coverTransform,
-					transition: coverTransition
-				}]"
-				@touchstart="coverTouchstart"
-				@touchmove="coverTouchmove"
-				@touchend="coverTouchend">
-				<!-- 数据集插槽 -->
-				<slot name="content-list"></slot>
-				<!-- 上拉加载 -->
-				<view class="load-more">{{loadText}}</view>
-			</view>
-		</scroll-view>
+		<view class="cover-container" :style="[{background: backgroundCover,transform: coverTransform,transition: coverTransition}]">
+			<scroll-view scroll-y :scroll-top="scrollTop" @scroll="conentScroll" @scrolltolower="loadMore" :style="getHeight">
+				<view @touchstart="coverTouchstart" @touchmove="coverTouchmove" @touchend="coverTouchend">
+					<!-- 数据集插槽 -->
+					<slot name="content-list"></slot>
+					<!-- 上拉加载 -->
+					<view class="load-more">{{loadText}}</view>
+				</view>
+			</scroll-view>
+		</view>
 	</view>
 </template>
 
@@ -118,9 +111,7 @@
 		},
 		methods: {
 			conentScroll(e) {
-				console.log(e.detail.scrollTop)
-				this.isTop = e.detail.scrollTop > 1 ? 0 : 1
-				console.log(this.isTop)
+				this.isTop = e.detail.scrollTop
 			},
 			// 根据currentPage和totalPages的值来判断 是否触发@loadMore
 			loadMore() {
@@ -133,13 +124,13 @@
 			},
 			// 回弹效果
 			coverTouchstart(e) {
-				if (this.isRefresh && this.isTop) {
+				if (this.isRefresh && this.isTop < 10) {
 					this.coverTransition = 'transform .1s linear'
 					this.startY = e.touches[0].clientY
 				}
 			},
 			coverTouchmove(e) {
-				if (!this.updating && this.isRefresh && this.isTop) {
+				if (!this.updating && this.isRefresh && this.isTop < 10) {
 					this.moveY = e.touches[0].clientY
 					let moveDistance = this.moveY - this.startY
 					if (moveDistance <= 50) {
@@ -149,7 +140,7 @@
 				}
 			},
 			coverTouchend() {
-				if (!this.updating && this.isRefresh && this.isTop) {
+				if (!this.updating && this.isRefresh && this.isTop < 10) {
 					if (this.moving) {
 						this.runRefresh()
 					} else {
@@ -191,12 +182,10 @@
 		margin: 0;
 		padding: 0;
 		width: 100%;
-		.scroll-box {
-			margin-top: -100rpx;
-		}
 		.cover-container{
 			width: 100%;
 			height: 100%;
+			margin-top: -100rpx;
 			.load-more{
 				font-size: 20rpx;
 				text-align: center;
