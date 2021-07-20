@@ -1,28 +1,12 @@
-# load-refresh
+### load-refresh
 
-### uni-app 组件封装---局部下拉刷新、上划加载更多
+   - 页面局部下拉刷新、上划加载更多、回弹效果等。
+   - 可以在App端、微信小程序端、H5端完美运行。
+   - 刷新动画使用了[Epic Spinners](https://epic-spinners.epicmax.co/)，也可以根据情况自定义。
+   - 组件的状态文字提醒，也可根据自身需求进行修改。
+   - 最新的项目示例代码可在[GitHub](https://github.com/iRainy6661/uni-load-refresh)获取。
 
-**注意**： *此组件基于uni-app前端框架，可以在uni-app中直接使用。*
-  - 可以在App、H5端、微信小程序完美运行。
-  - 刷新动画使用了[Epic Spinners](https://epic-spinners.epicmax.co/)，也可以根据情况自定义。
-  - 组件的状态文字提醒，也可根据自身需求进行修改。
-  - **更多详情请访问 uni-app [插件市场](https://ext.dcloud.net.cn/plugin?id=1866)。**
-
-## 项目运行
-
-  - clone项目到本地
-
-```sh
-    git clone git@github.com:iRainy6661/uni-load-refresh.git
-```
-
-  - 使用HBuilderX导入项目
-  - 运行到浏览器（H5端）、微信小程序端、App端等
-  
-#### 以H5运行结果为例：
-![refresh](http://www.jianking.vip/images/refresh.png) ![loadMore](http://www.jianking.vip/images/loadMore.png) ![scrollEnd](http://www.jianking.vip/images/scrollEnd.png)
-
-## load-refresh 组件使用
+## 使用方法
 
 #### 在 `script` 中引用组件
 
