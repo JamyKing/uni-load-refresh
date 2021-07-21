@@ -13,5 +13,7 @@
 </script>
 
 <style>
-	
+	page {
+		background-color: #F5F8FA;
+	}
 </style>

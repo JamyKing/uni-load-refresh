@@ -1,24 +1,25 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<view class="date-item">日期范围：{{dateValue[0]}} - {{dateValue[1]}}</view>
+			<view class="date-item">日期范围：{{startTime}} 至 {{endTime}}</view>
 		</view>
 		<button class="date-btn" type="default" @click="openPicker">打开</button>
-		<sofar-picker :visable.sync="pickerVisable" :defaultDate="defaultDate" @confirm="confirm"></sofar-picker>
+		<term-picker :visable.sync="pickerVisable" :defaultDate="defaultDate" @confirm="confirm"></term-picker>
 	</view>
 </template>
 
 <script>
-	import sofarPicker from '@/components/sofar-picker/sofar-picker.vue'
+	import termPicker from '@/components/term-picker/term-picker.vue'
 	export default {
 		components: {
-			sofarPicker
+			termPicker
 		},
 		data() {
 			return {
 				pickerVisable: false,
 				defaultDate: [],
-				dateValue: []
+				startTime: '',
+				endTime: ''
 			}
 		},
 		methods: {
@@ -26,7 +27,8 @@
 				this.pickerVisable = true
 			},
 			confirm(date) {
-				this.dateValue = date
+				this.startTime = date[0]
+				this.endTime = date[1]
 			}
 		}
 	}

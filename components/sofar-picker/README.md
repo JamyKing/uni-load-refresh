@@ -72,8 +72,7 @@ export default {
     data() {
       return {
         pickerVisable: false,
-        defaultDate: ['2020.1', '至今'],
-        dateValue: []
+        defaultDate: ['2020.1', '至今']
       }
     },
     methods: {
@@ -83,7 +82,7 @@ export default {
       },
       // 点击确定按钮，返回当前选择的值
       confirm(date) {
-        this.dateValue = date
+        console.log(date) // ['2020.6', '至今']
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<view class="date-item">日期范围：{{dateValue[0]}} - {{dateValue[1]}}</view>
+			<view class="date-item">年月范围：{{startTime}} - {{endTime}}</view>
 		</view>
 		<button class="date-btn" type="default" @click="openPicker">打开</button>
 		<sofar-picker :visable.sync="pickerVisable" :defaultDate="defaultDate" @confirm="confirm"></sofar-picker>
@@ -18,7 +18,8 @@
 			return {
 				pickerVisable: false,
 				defaultDate: [],
-				dateValue: []
+				startTime: '',
+				endTime: ''
 			}
 		},
 		methods: {
@@ -26,7 +27,8 @@
 				this.pickerVisable = true
 			},
 			confirm(date) {
-				this.dateValue = date
+				this.startTime = date[0]
+				this.endTime = date[1]
 			}
 		}
 	}
