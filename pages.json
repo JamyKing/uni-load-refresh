@@ -1,34 +1,36 @@
 {
 	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/guide/index",
+			"style": {
+				"navigationBarTitleText": "导航"
+			}
+		},
+		{
+			"path": "pages/loadRefresh/index",
 			"style": {
 				"navigationBarTitleText": "load-refresh 组件"
 			}
 		},
 		{
-			"path": "pages/tabs/tabs",
+			"path": "pages/loadRefresh/tabs",
 			"style": {
 				"navigationBarTitleText": "tabs+swiper 全屏选项卡"
 			}
+		},
+		{
+			"path": "pages/sofarPicker/index",
+			"style": {
+				"navigationBarTitleText": "sofar-picker 组件"
+			}
+		},
+		{
+			"path": "pages/termPicker/index",
+			"style": {
+				"navigationBarTitleText": "term-picker 组件"
+			}
 		}
     ],
-	"tabBar": {
-		"color": "#999999",
-		"selectedColor": "#00aaff",
-		"backgroundColor": "#FFFFFF",
-		"borderStyle": "black",
-		"list": [
-			{
-				"text": "load-refresh",
-				"pagePath": "pages/index/index"
-			},
-			{
-				"text": "tabs-swiper",
-				"pagePath": "pages/tabs/tabs"
-			}
-		]
-	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "load-refresh",
