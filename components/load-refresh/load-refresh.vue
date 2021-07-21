@@ -22,9 +22,9 @@
 			</view>
 		</view>
 		<!-- 数据列表块 -->
-		<view class="cover-container" :style="[{background: backgroundCover,transform: coverTransform,transition: coverTransition}]">
+		<view class="cover-container">
 			<scroll-view scroll-y :scroll-top="scrollTop" @scroll="conentScroll" @scrolltolower="loadMore" :style="getHeight">
-				<view @touchstart="coverTouchstart" @touchmove="coverTouchmove" @touchend="coverTouchend">
+				<view :style="[{background: backgroundCover,transform: coverTransform,transition: coverTransition}]" @touchstart="coverTouchstart" @touchmove="coverTouchmove" @touchend="coverTouchend">
 					<!-- 数据集插槽 -->
 					<slot name="content-list"></slot>
 					<!-- 上拉加载 -->
