@@ -4,7 +4,7 @@
 
 ## 组件目录
 
-  - loadRefresh 上滑加载下拉刷新
+  - [loadRefresh](/components/load-refresh) 上滑加载下拉刷新
   - sofarPicker 年-月 范围组件
   - termPicker 年-月-日 范围组件
 
