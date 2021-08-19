@@ -22,14 +22,21 @@
 			</view>
 		</view>
 		<!-- 数据列表块 -->
-		<view class="cover-container">
-			<scroll-view scroll-y :scroll-top="scrollTop" @scroll="conentScroll" @scrolltolower="loadMore" :style="getHeight">
-				<view :style="[{background: backgroundCover,transform: coverTransform,transition: coverTransition}]" @touchstart="coverTouchstart" @touchmove="coverTouchmove" @touchend="coverTouchend">
-					<!-- 数据集插槽 -->
-					<slot name="content-list"></slot>
-					<!-- 上拉加载 -->
-					<view class="load-more">{{loadText}}</view>
-				</view>
+		<view
+			class="cover-container"
+			:style="[{
+				background: backgroundCover,
+				transform: coverTransform,
+				transition: coverTransition
+			}]"
+			@touchstart="coverTouchstart"
+			@touchmove="coverTouchmove"
+			@touchend="coverTouchend">
+			<scroll-view scroll-y class="list" :scroll-top="scrollTop" @scrolltolower="loadMore" :style="getHeight">
+				<!-- 数据集插槽 -->
+				<slot name="content-list"></slot>
+				<!-- 上拉加载 -->
+				<view class="load-more">{{loadText}}</view>
 			</scroll-view>
 		</view>
 	</view>
@@ -76,7 +83,6 @@
 			return {
 				startY: 0,
 				moveY: 0,
-				isTop: 1,
 				updating: false, // 数据更新状态（true: 更新中）
 				updateType: true, // 数据更新类型（true: 下拉刷新: false: 加载更多）
 				moving: false,
@@ -110,9 +116,6 @@
 			}
 		},
 		methods: {
-			conentScroll(e) {
-				this.isTop = e.detail.scrollTop
-			},
 			// 根据currentPage和totalPages的值来判断 是否触发@loadMore
 			loadMore() {
 				const { currentPage, totalPages } = this
@@ -124,29 +127,32 @@
 			},
 			// 回弹效果
 			coverTouchstart(e) {
-				if (this.isRefresh && this.isTop < 10) {
-					this.coverTransition = 'transform .1s linear'
-					this.startY = e.touches[0].clientY
+				if (!this.isRefresh) {
+					return
 				}
+				this.coverTransition = 'transform .1s linear'
+				this.startY = e.touches[0].clientY
 			},
 			coverTouchmove(e) {
-				if (!this.updating && this.isRefresh && this.isTop < 10) {
-					this.moveY = e.touches[0].clientY
-					let moveDistance = this.moveY - this.startY
-					if (moveDistance <= 50) {
-						this.coverTransform = `translateY(${moveDistance}px)`
-					}
-					this.moving = moveDistance >= 50
+				if (!this.isRefresh || this.updating) {
+					return
 				}
+				this.moveY = e.touches[0].clientY
+				let moveDistance = this.moveY - this.startY
+				if (moveDistance <= 50) {
+					this.coverTransform = `translateY(${moveDistance}px)`
+				}
+				this.moving = moveDistance >= 50
 			},
 			coverTouchend() {
-				if (!this.updating && this.isRefresh && this.isTop < 10) {
-					if (this.moving) {
-						this.runRefresh()
-					} else {
-						this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
-						this.coverTransform = 'translateY(0px)'
-					}
+				if (!this.isRefresh || this.updating) {
+					return
+				}
+				if (this.moving) {
+					this.runRefresh()
+				} else {
+					this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)'
+					this.coverTransform = 'translateY(0px)'
 				}
 			},
 			runRefresh() {
@@ -184,13 +190,15 @@
 		width: 100%;
 		.cover-container{
 			width: 100%;
-			height: 100%;
 			margin-top: -100rpx;
-			.load-more{
-				font-size: 20rpx;
-				text-align: center;
-				color: #AAAAAA;
-				padding: 16rpx;
+			.list{
+				width: 100%;
+				.load-more{
+					font-size: 20rpx;
+					text-align: center;
+					color: #AAAAAA;
+					padding: 16rpx;
+				}
 			}
 		}
 	}
