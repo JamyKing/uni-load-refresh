@@ -145,10 +145,10 @@
 				this.getDate(e.detail.value)
 			},
 			pickerConfirm() {
-				const { resultDate, year, month } = this
-				let nowTime = new Date(year+'/'+month).getTime()
-				let startTime = new Date(resultDate[0]).getTime()
-				let endTime = resultDate[1] === '至今' ? nowTime : new Date(resultDate[1]).getTime()
+				const { resultDate, separator } = this
+				let nowTime = new Date().getTime()
+				let startTime = new Date(resultDate[0] + separator + '1').getTime()
+				let endTime = resultDate[1] === '至今' ? nowTime : new Date(resultDate[1] + separator + '1').getTime()
 				if (startTime <= endTime && endTime <= nowTime) {
 					this.$emit('confirm', resultDate)
 					this.maskClick()
