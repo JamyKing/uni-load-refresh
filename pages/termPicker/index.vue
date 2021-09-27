@@ -4,7 +4,7 @@
 			<view class="date-item">日期范围：{{startTime}} 至 {{endTime}}</view>
 		</view>
 		<button class="date-btn" type="default" @click="openPicker">打开</button>
-		<term-picker :visable.sync="pickerVisable" :defaultDate="defaultDate" @confirm="confirm"></term-picker>
+		<term-picker :visable.sync="pickerVisable" :defaultDate="defaultDate" :deferYear="1" @confirm="confirm"></term-picker>
 	</view>
 </template>
 

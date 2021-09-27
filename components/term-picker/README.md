@@ -1,7 +1,7 @@
 # term-picker
 
    - 日期范围选择，颗粒度为`年-月-日`。
-   - 也是根据开发需求去借鉴其他代码后完成的，分享出来希望有帮助。
+   - 根据实际开发需求完成，分享出来希望有帮助。
    - 最新的项目示例代码可在[GitHub](https://github.com/iRainy6661/uni-load-refresh)获取。
 
 ## 使用方法
@@ -9,10 +9,10 @@
 #### 在 `script` 中引用组件
 
 ```
-import sofarPicker from '@/components/term-picker/term-picker.vue'
+import termPicker from '@/components/term-picker/term-picker.vue'
 export default {
   components: {
-    sofarPicker
+    termPicker
   }
 }
 ```
@@ -24,6 +24,8 @@ export default {
   :visable.sync="pickerVisable"
   :defaultDate="defaultDate"
   :minYear="1990"
+  :timeLimit="false"
+  :deferYear="0"
   themeColor="#10BE9D"
   startText="开始时间"
   endText="结束时间"
@@ -38,6 +40,8 @@ export default {
 | visable | Boolean | false | 日期选择控件的显示/隐藏，注意使用`.sync`修饰符(true: 显示; false: 隐藏) |
 | defaultDate | Array | [] | 默认预设值 |
 | minYear | Number | 1990 | 最小年份 |
+| timeLimit | Boolean | false | 日期区间限制(true: 限制结束日期`<=`当前日期; false: 不限制) |
+| deferYear | Number | 0 | 年份选项顺延数，仅当`timeLimit`为`false`时生效(举个栗子: `deferYear = 1`, 则年份选项的最大值为: `当前年份 + deferYear`) |
 | themeColor | String | #10BE9D | 选择框操作栏部分字体颜色 |
 | startText | String | 开始时间 | 日期范围起始处文本 |
 | endText | String | 结束时间 | 日期范围结束处文本 |

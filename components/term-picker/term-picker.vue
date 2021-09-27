@@ -45,6 +45,14 @@
                 type: Number,
                 default: 1990,
             },
+			timeLimit: {
+				type: Boolean,
+				default: false
+			},
+			deferYear: {
+				type: Number,
+				default: 0,
+			},
 			themeColor:{
 				type: String,
 				default: '#10BE9D'
@@ -65,7 +73,8 @@
             const months = [];
             const month = date.getMonth() + 1;
             const day = date.getDate();
-            for (let i = this.minYear; i <= date.getFullYear(); i++) {
+			const maxYear = this.timeLimit ? year : year + this.deferYear
+            for (let i = this.minYear; i <= maxYear; i++) {
                 years.push(i);
             }
             for (let i = 1; i <= 12; i++) {
@@ -131,33 +140,33 @@
 				this.resultDate[this.touchIndex] =  year + '-' + month + '-' + day
 			},
 			pickerChange(e) {
-			    const currents = e.detail.value;
+			    const currents = e.detail.value
 			    if (currents[1] + 1 === 2) {
-			        this.days = [];
+			        this.days = []
 			        if (
 			            ((currents[0] + this.minYear) % 4 === 0 &&
 			                (currents[0] + this.minYear) % 100 !== 0) ||
 			            (currents[0] + this.minYear) % 400 === 0
 			        ) {
 			            for (let i = 1; i < 30; i++) {
-			                this.days.push(i);
+			                this.days.push(i)
 			            }
 			        } else {
 			            for (let i = 1; i < 29; i++) {
-			                this.days.push(i);
+			                this.days.push(i)
 			            }
 			        }
 			    } else if ([4, 6, 9, 11].some((item) => currents[1] + 1 === item)) {
-			        this.days = [];
+			        this.days = []
 			        for (let i = 1; i < 31; i++) {
-			            this.days.push(i);
+			            this.days.push(i)
 			        }
 			    } else if (
 			        [1, 3, 5, 7, 8, 10, 12].some((item) => currents[1] + 1 === item)
 			    ) {
-			        this.days = [];
+			        this.days = []
 			        for (let i = 1; i < 32; i++) {
-			            this.days.push(i);
+			            this.days.push(i)
 			        }
 			    }
 				this.pickerValue = currents
@@ -167,10 +176,10 @@
 				this.$emit('update:visable', false)
 			},
             pickerConfirm() {
-				const { resultDate } = this
+				const { resultDate, timeLimit } = this
 				let startTime = new Date(resultDate[0]).getTime()
 				let endTime = new Date(resultDate[1]).getTime()
-				let nowTime = new Date().getTime()
+				let nowTime = timeLimit ? new Date().getTime() : endTime
 				if (startTime <= endTime && endTime <= nowTime) {
 					this.$emit('confirm', resultDate)
 					this.maskClick()
