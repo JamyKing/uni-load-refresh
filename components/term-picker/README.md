@@ -38,7 +38,7 @@ export default {
 | 参数名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
 | visable | Boolean | false | 日期选择控件的显示/隐藏，注意使用`.sync`修饰符(true: 显示; false: 隐藏) |
-| defaultDate | Array | [] | 默认预设值 |
+| defaultDate | Array | [] | 默认预设值(比如:`['2021-06-01', '2021-07-01']`) |
 | minYear | Number | 1990 | 最小年份 |
 | timeLimit | Boolean | false | 日期区间限制(true: 限制结束日期`<=`当前日期; false: 不限制) |
 | deferYear | Number | 0 | 年份选项顺延数，仅当`timeLimit`为`false`时生效(举个栗子: `deferYear = 1`, 则年份选项的最大值为: `当前年份 + deferYear`) |
