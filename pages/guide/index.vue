@@ -16,7 +16,32 @@
 				
 			}
 		},
+		onLoad() {
+			// this.loadData()
+			// this.loadOther()
+		},
 		methods: {
+			// 一般写法
+			loadData() {
+				this.$api.request({
+					url: '/test',
+					method: 'GET',
+					data: {id: 1}
+				}).then(res => {
+					console.log(res)
+				}).catch(err => {
+					console.error(err)
+				})
+			},
+			// async await写法
+			async loadOther() {
+				try {
+					const res = await this.$api.request({url: '/test', method: 'GET', data: {id: 1}})
+					console.log(res)
+				} catch(err) {
+					console.error(err)
+				}
+			},
 			navTo(url) {
 				uni.navigateTo({
 					url: url
