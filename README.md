@@ -13,7 +13,7 @@
   - clone项目到本地
 
 ```sh
-    git clone git@github.com:iRainy6661/uni-load-refresh.git
+    git clone git@github.com:JamyKing/uni-load-refresh.git
 ```
 
   - 使用HBuilderX导入项目

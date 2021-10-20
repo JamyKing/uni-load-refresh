@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
-const request = (params) => {
+const request = (params = {}) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: params.loadText || 'Loading',

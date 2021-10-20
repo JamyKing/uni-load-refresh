@@ -2,7 +2,7 @@
 
    - 日期范围选择，颗粒度为`年-月`，支持`至今`选项。
    - 根据实际开发需求完成，分享出来希望有帮助。
-   - 最新的项目示例代码可在[GitHub](https://github.com/iRainy6661/uni-load-refresh)获取。
+   - 最新的项目示例代码可在[GitHub](https://github.com/JamyKing/uni-load-refresh)获取。
 
 ## 使用方法
 
