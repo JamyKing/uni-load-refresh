@@ -28,6 +28,12 @@
             "style": {
                 "navigationBarTitleText": "term-picker 组件"
             }
+        },
+        {
+            "path": "pages/structureCascade/index",
+            "style": {
+                "navigationBarTitleText": "架构级联 组件"
+            }
         }
     ],
     "globalStyle": {
