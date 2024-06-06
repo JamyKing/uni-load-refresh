@@ -1,11 +1,11 @@
 <template>
     <view>
         <structure-cascade
-         ref="structureCascade"
-         valueField="deptId"
-         labelField="name"
-         :defaultValue="defaultValue"
-         :treeData="treeData">
+          ref="strCascade"
+          v-model="results"
+          valueField="deptId"
+          labelField="name"
+          :treeData="treeData">
         </structure-cascade>
     </view>
 </template>
@@ -80,10 +80,7 @@
                         ]
                     }
                 ],
-                defaultValue: {
-                    deptId: "10",
-                    parentId: "7"
-                }
+                results: []
             }
         },
         onLoad() {

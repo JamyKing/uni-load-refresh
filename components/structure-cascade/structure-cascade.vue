@@ -1,7 +1,7 @@
 <template>
     <view class="container">
         <view class="header">
-            <scroll-view  class="nav-tree" scroll-x enable-flex="true" :scroll-left="scrollLeft">
+            <scroll-view class="nav-tree" scroll-x enable-flex="true" :scroll-left="scrollLeft">
                 <view v-for="(item, index) in navTreeList" :key="item[valueField]" class="nav-tree-item">
                     <text :class="{special: index < navLen - 1 }" class="text" @click="handleNavgiateToDept(index)">
                         {{ item[labelField] }}
@@ -12,12 +12,15 @@
         </view>
         <view class="content">
             <view class="dept-list">
-                <view v-for="item in listData" :key="item[valueField]" class="dept-list-item" @click="handleToChild(item)">
+                <view v-for="item in listData" :key="item[valueField]" class="dept-list-item"
+                    @click="handleToChild(item)">
                     <block v-if="checkIcon">
-                        <image v-if="item.checked" :src="checkIcon" class="check-icon" @click.stop="handleChoose(item)"></image>
+                        <image v-if="item.checked" :src="checkIcon" class="check-icon" @click.stop="handleChoose(item)">
+                        </image>
                         <view v-else class="checkbox" @click.stop="handleChoose(item)"></view>
                     </block>
-                    <view v-if="!checkIcon" :class="{active: item.checked }" class="checkbox" @click.stop="handleChoose(item)"></view>
+                    <view v-if="!checkIcon" :class="{active: item.checked }" class="checkbox"
+                        @click.stop="handleChoose(item)"></view>
                     <view class="text">{{ item[labelField] }}</view>
                     <image v-if="moreIcon && !isEmpty(item.children)" :src="moreIcon" class="more-icon"></image>
                     <text v-if="!moreIcon && !isEmpty(item.children)" class="more-text"> > </text>
@@ -32,11 +35,11 @@
     export default {
         name: 'structureCascade',
         props: {
-            treeData: {
+            value: {
                 type: Array,
                 default: () => []
             },
-            defaultValue: {
+            treeData: {
                 type: Array,
                 default: () => []
             },
@@ -106,22 +109,22 @@
         },
         methods: {
             initList() {
-                if (this.isEmpty(this.defaultValue)) {
-                    this.listData = this.treeData
+                if (this.isEmpty(this.value)) {
+                    this.listData = this.deepCopy(this.treeData)
                 } else {
                     if (this.isRadio) {
-                        const topList = this.getParentNodes(this.treeData, this.defaultValue[0])
+                        const topList = this.getParentNodes(this.treeData, this.value[0])
                         this.navTreeList.push(...topList)
                         const length = this.navTreeList.length
-                        this.listData = this.navTreeList[length - 1].children
+                        this.listData = this.deepCopy(this.navTreeList[length - 1].children)
                     } else {
-                        this.listData = this.treeData
+                        this.listData = this.deepCopy(this.treeData)
                     }
-                    this.selectedList = this.defaultValue
+                    this.selectedList = this.deepCopy(this.value)
                 }
-                this.getDefaultChecked()
+                this.updateChecked()
             },
-            getDefaultChecked() {
+            updateChecked() {
                 const key = this.valueField
                 const keys = (this.selectedList || []).map(o => o[key])
                 this.listData.forEach(item => {
@@ -132,24 +135,23 @@
                     }
                 })
             },
-            handleToSearch(keyworad) {
-                if (keyworad) {
-                    this.listData = this.getFilterData(keyworad)
+            handleToSearch(keyword) {
+                if (keyword) {
+                    this.listData = this.deepCopy(this.getFilterData(keyword))
                 } else {
-                    this.listData = this.treeData
+                    this.listData = this.deepCopy(this.treeData)
                 }
             },
             // 跳转到子项
             handleToChild(item) {
                 if (!this.isEmpty(item.children)) {
-                    this.listData = item.children
-                    this.copyList = null
+                    this.listData = this.deepCopy(item.children)
                     this.navTreeList.push({
                         [this.valueField]: item[this.valueField],
                         [this.labelField]: item[this.labelField]
                     })
                     this.scrollLeft += 60
-                    this.getDefaultChecked()
+                    this.updateChecked()
                 } else {
                     this.handleChoose(item)
                 }
@@ -171,8 +173,8 @@
                         }
                     }
                 } else {
-                    this.listData = tree
-                    this.getDefaultChecked()
+                    this.listData = this.deepCopy(tree)
+                    this.updateChecked()
                 }
             },
             // 切换选中
@@ -184,7 +186,7 @@
                             [this.valueField]: item[this.valueField],
                             [this.labelField]: item[this.labelField]
                         }]
-                        this.getDefaultChecked()
+                        this.updateChecked()
                     } else {
                         this.selectedList = []
                     }
@@ -198,7 +200,7 @@
                             [this.valueField]: item[this.valueField],
                             [this.labelField]: item[this.labelField]
                         })
-                        this.getDefaultChecked()
+                        this.updateChecked()
                     } else {
                         // 取消勾选
                         const findIndex = this.selectedList.findIndex(o => o[this.valueField] === item[this.valueField])
@@ -207,17 +209,11 @@
                         }
                     }
                 }
+                this.$nextTick(() => {
+                    this.$emit('input', this.selectedList)
+                })
             },
-            setSelected(list) {
-                this.selectedList = list
-                this.getDefaultChecked()
-            },
-            handleConfirm() {
-                if (this.selectedList.length) {
-                    this.$emit('confirm', this.selectedList)
-                }
-            },
-            
+
             // 空数组 空对象 去掉首尾空格的空字符串 都为记为空
             isEmpty(data) {
                 if (data === null) return true
@@ -226,6 +222,21 @@
                 if (Object.prototype.toString.call(data) === '[object Object]') return Object.keys(data).length === 0
                 if (typeof data === 'string') return data.trim() === ''
                 return false
+            },
+            deepCopy(source) {
+                if (typeof source === 'object') {
+                    // var sourceCopy = source instanceof Array ? [] : {}
+                    var sourceCopy = Array.isArray(source) ? [] : {}
+                    for (var item in source) {
+                        if (!source[item]) {
+                            sourceCopy[item] = source[item]
+                        } else {
+                            sourceCopy[item] = typeof source[item] === 'object' ? this.deepCopy(source[item]) : source[item]
+                        }
+                    }
+                    return sourceCopy
+                }
+                return source
             },
             // 获取目标节点aim的所有祖宗节点 不包括aim本身
             getParentNodes(tree, aim) {
@@ -251,14 +262,14 @@
                 return temp
             },
             // 根据检索条件返回一维数组
-            getFilterData(keyworad, data = this.treeData) {
+            getFilterData(keyword, data = this.treeData) {
                 var result = []
                 const valueField = this.valueField
                 const labelField = this.labelField
                 var fn = function(data) {
                     if (Array.isArray(data)) {
                         data.forEach(item => {
-                            if (item.name.includes(keyworad)) {
+                            if (item.name.includes(keyword)) {
                                 result.push({
                                     [valueField]: item[valueField],
                                     [labelField]: item[labelField]
@@ -288,24 +299,29 @@
             width: 100%;
             padding: 30rpx 36rpx;
             background-color: white;
+
             .nav-tree {
                 width: 678rpx;
                 height: 40rpx;
                 display: flex;
                 white-space: nowrap;
+
                 .nav-tree-item {
                     flex-shrink: 0;
                     font-size: 28rpx;
                     color: #333333;
                     display: flex;
                     align-items: center;
+
                     .special {
                         color: #1677FF;
                     }
+
                     .right-text {
                         color: #333333;
                         margin: 0 16rpx 6rpx;
                     }
+
                     .right-icon {
                         width: 36rpx;
                         height: 36rpx;
@@ -319,9 +335,11 @@
             width: 100%;
             padding: 0 36rpx;
             background-color: white;
+
             .dept-list {
                 display: flex;
                 flex-direction: column;
+
                 .dept-list-item {
                     font-size: 28rpx;
                     padding: 30rpx 0;
@@ -329,6 +347,7 @@
                     align-items: center;
                     justify-content: flex-start;
                     border-top: 1rpx solid #EEEEEE;
+
                     .checkbox {
                         width: 36rpx;
                         height: 36rpx;
@@ -338,15 +357,18 @@
                         display: inline-flex;
                         align-items: center;
                         justify-content: center;
+
                         &.active {
                             border-color: #1677FF;
                             background-color: #1677FF;
                         }
                     }
+
                     .check-icon {
                         width: 36rpx;
                         height: 36rpx;
                     }
+
                     .text {
                         flex: 1;
                         margin-left: 36rpx;
@@ -354,18 +376,20 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                     }
+
                     .more-icon {
                         width: 40rpx;
                         height: 40rpx;
                         margin-right: 15rpx;
                     }
+
                     .more-text {
                         color: #919191;
                     }
                 }
             }
         }
-        
+
         .bottom-gap {
             width: 100%;
             height: 120rpx;
