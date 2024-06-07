@@ -7,6 +7,7 @@
   - [loadRefresh](/components/load-refresh) 上滑加载下拉刷新
   - [sofarPicker](/components/sofar-picker) 年-月 范围组件
   - [termPicker](/components/term-picker) 年-月-日 范围组件
+  - [structure-cascade](/components/structure-cascade) 多级树形选择
 
 ## 项目运行
 
