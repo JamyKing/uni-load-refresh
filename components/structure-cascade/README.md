@@ -25,7 +25,7 @@ export default {
     ref="strCascade"
     v-model="strResults"
     topTitle="组织架构"
-    valueField="deptId"
+    valueField="id"
     labelField="name"
     :checkIcon="require('@/static/icons/icon_gou.png')"
     :moreIcon="require('@/static/icons/ico_more@2x.png')"
@@ -45,7 +45,7 @@ export default {
 | valueField | String | id | 自定义`value`属性名 |
 | labelField | String | name | 自定义`label`属性名 |
 | checkIcon | String | '' | 数据勾选时的icon展示 |
-| moreIcon | Number | '' | 当前节点存在字节点时的icon展示 |
+| moreIcon | String | '' | 当前节点存在字节点时的icon展示 |
 
 #### Notes 注意事项
 
