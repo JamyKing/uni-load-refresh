@@ -43,7 +43,7 @@ export default {
 | isRadio | Boolean | true | 是否为单选 |
 | selectMax | Number | 0 | 多选时最大选择数，仅在`isRadio`为`false`时生效(0: 不限) |
 | valueField | String | id | 自定义`value`属性名 |
-| labelField | String | name | 自定`label`义属性名 |
+| labelField | String | name | 自定义`label`属性名 |
 | checkIcon | String | '' | 数据勾选时的icon展示 |
 | moreIcon | Number | '' | 当前节点存在字节点时的icon展示 |
 
