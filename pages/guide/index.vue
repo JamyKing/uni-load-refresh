@@ -5,6 +5,7 @@
             <view class="menu-item" @click="navTo('/pages/loadRefresh/tabs')">tabs + swiper 全屏选项卡</view>
             <view class="menu-item" @click="navTo('/pages/sofarPicker/index')">sofarPicker 年-月 范围组件</view>
             <view class="menu-item" @click="navTo('/pages/termPicker/index')">termPicker 年-月-日 范围组件</view>
+            <view class="menu-item" @click="navTo('/pages/structureCascade/index')">structureCascade 多级树形选择</view>
         </view>
     </view>
 </template>

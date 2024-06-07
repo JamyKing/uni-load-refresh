@@ -23,14 +23,13 @@ export default {
 ```
 <structure-cascade
     ref="strCascade"
+    v-model="strResults"
     topTitle="组织架构"
     valueField="deptId"
     labelField="name"
     :checkIcon="require('@/static/icons/icon_gou.png')"
     :moreIcon="require('@/static/icons/ico_more@2x.png')"
-    :defaultValue="defaultValue"
-    :treeData="treeData"
-    @confirm="selectConfirm">
+    :treeData="treeData">
 </structure-cascade>
 ```
 
@@ -38,9 +37,9 @@ export default {
 
 | 参数名 | 类型 | 默认值 | 说明 |
 | ------ | ------ | ------ | ------ |
+| value / v-model | Array | [] | 绑定值 |
 | topTitle | String | 组织架构 | 头部顶级索引名称 |
 | treeData | Array | [] | 树形结构数据（参考如下Demo） |
-| defaultValue | Array | [] | 默认选中项 |
 | isRadio | Boolean | true | 是否为单选 |
 | selectMax | Number | 0 | 多选时最大选择数，仅在`isRadio`为`false`时生效(0: 不限) |
 | valueField | String | id | 自定义`value`属性名 |
@@ -48,23 +47,11 @@ export default {
 | checkIcon | String | '' | 数据勾选时的icon展示 |
 | moreIcon | Number | '' | 当前节点存在字节点时的icon展示 |
 
-#### Events 事件说明
-
-| 事件名 | 说明 | 返回值 |
-| ------ | ------ | ------ |
-| @confirm | 返回当前选中值 | Array数组格式 |
-
-#### Methods 组件内方法
-
-| 方法名 | 说明 | 使用 |
-| ------ | ------ | ------ |
-| handleConfirm() | 抛出选中的数据(也可以直接取组件内的`selectedList`) | this.$refs.strCascade.handleConfirm() |
-| setSelected() | 设置选中数据(备用) | this.$refs.strCascade.setSelected() |
-
 #### Notes 注意事项
 
   - 该组件尚不支持父子节点联动选中。
   - 图片路径请使用`require`，例如：`:checkIcon="require('@/static/icons/icon_gou.png')"`。
+  - 设置默认值选中时，需要`valueField`和`labelField`两个属性参数。
   - 树形结构数据中子节点需要有`parentId`属性参数，有默认值选中时回显需要使用到。
   - 如果对您有帮助，请鼓励支持一下，[![GitHub stars](https://img.shields.io/github/stars/JamyKing/uni-load-refresh?style=falt)](https://github.com/JamyKing/uni-load-refresh)。
 
@@ -72,17 +59,16 @@ export default {
 
 ```
 <template>
-  <view class="content">
+  <view>
     <structure-cascade
       ref="strCascade"
+      v-model="strResults"
       topTitle="组织架构"
       valueField="id"
       labelField="name"
       :checkIcon="require('@/static/icons/icon_gou.png')"
       :moreIcon="require('@/static/icons/ico_more@2x.png')"
-      :defaultValue="defaultValue"
-      :treeData="treeData"
-      @confirm="selectConfirm">
+      :treeData="treeData">
     </structure-cascade>
   </view>
 </template>
@@ -102,27 +88,23 @@ export default {
             children: [
               {
                 id: 2,
-                name: ''二级_1-1,
+                name: '二级_1-1',
                 parentId: 1
               },
               {
                 id: 3,
-                name: ''二级_1-2,
+                name: '二级_1-2',
                 parentId: 1
               }
             ]
           }
-        ], // 数据集
-        defaultValue: [
+        ], // 树形结构
+        strResults: [
           {
-            id: 3
+            id: 3,
+            name: '二级_1-2'
           }
         ] // 默认选中回显
-      }
-    },
-    methods: {
-      selectConfirm(data) {
-        console.log(data) // 选中结果
       }
     }
   }

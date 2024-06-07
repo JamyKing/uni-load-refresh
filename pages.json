@@ -32,7 +32,7 @@
         {
             "path": "pages/structureCascade/index",
             "style": {
-                "navigationBarTitleText": "架构级联 组件"
+                "navigationBarTitleText": "多级树形选择 组件"
             }
         }
     ],
