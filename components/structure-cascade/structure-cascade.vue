@@ -15,8 +15,7 @@
                 <view v-for="item in listData" :key="item[valueField]" class="dept-list-item"
                     @click="handleToChild(item)">
                     <block v-if="checkIcon">
-                        <image v-if="item.checked" :src="checkIcon" class="check-icon" @click.stop="handleChoose(item)">
-                        </image>
+                        <image v-if="item.checked" :src="checkIcon" class="check-icon" @click.stop="handleChoose(item)"></image>
                         <view v-else class="checkbox" @click.stop="handleChoose(item)"></view>
                     </block>
                     <view v-if="!checkIcon" :class="{active: item.checked }" class="checkbox"
@@ -117,6 +116,7 @@
                         this.navTreeList.push(...topList)
                         const length = this.navTreeList.length
                         this.listData = this.deepCopy(this.navTreeList[length - 1].children)
+                        this.scrollLeft = length * 60
                     } else {
                         this.listData = this.deepCopy(this.treeData)
                     }
@@ -213,8 +213,6 @@
                     this.$emit('input', this.selectedList)
                 })
             },
-
-            // 空数组 空对象 去掉首尾空格的空字符串 都为记为空
             isEmpty(data) {
                 if (data === null) return true
                 if (data === undefined) return true
@@ -225,7 +223,6 @@
             },
             deepCopy(source) {
                 if (typeof source === 'object') {
-                    // var sourceCopy = source instanceof Array ? [] : {}
                     var sourceCopy = Array.isArray(source) ? [] : {}
                     for (var item in source) {
                         if (!source[item]) {
