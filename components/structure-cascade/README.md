@@ -3,7 +3,7 @@
    - 树形结构数据选择组件。
    - 适用于一些多级部门、组织架构类的数据选择。
    - 根据实际开发需求整理出来的，有需要的可以进行二次开发。
-   - 最新的项目示例代码可在[GitHub](https://github.com/JamyKing/structure-cascade)获取。
+   - 最新的项目示例代码可在[GitHub](https://github.com/JamyKing/uni-load-refresh)获取。
 
 ## 使用方法
 
