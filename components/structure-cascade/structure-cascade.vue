@@ -113,10 +113,14 @@
                 } else {
                     if (this.isRadio) {
                         const topList = this.getParentNodes(this.treeData, this.value[0])
-                        this.navTreeList.push(...topList)
-                        const length = this.navTreeList.length
-                        this.listData = this.deepCopy(this.navTreeList[length - 1].children)
-                        this.scrollLeft = length * 100
+                        if (topList.length) {
+                            this.navTreeList.push(...topList)
+                            const length = this.navTreeList.length
+                            this.listData = this.deepCopy(this.navTreeList[length - 1].children)
+                            this.scrollLeft = length * 100
+                        } else {
+                            this.listData = this.deepCopy(this.treeData)
+                        }
                     } else {
                         this.listData = this.deepCopy(this.treeData)
                     }
@@ -266,12 +270,13 @@
                 var fn = function(data) {
                     if (Array.isArray(data)) {
                         data.forEach(item => {
-                            if (item.name.includes(keyword)) {
+                            if (item[labelField].includes(keyword)) {
                                 result.push({
                                     [valueField]: item[valueField],
                                     [labelField]: item[labelField]
                                 })
-                            } else if (item.children) {
+                            }
+                            if (item.children) {
                                 fn(item.children)
                             }
                         })
@@ -296,24 +301,29 @@
             width: 100%;
             padding: 30rpx 36rpx;
             background-color: white;
+
             .nav-tree {
                 width: 678rpx;
                 height: 40rpx;
                 display: flex;
                 white-space: nowrap;
+
                 .nav-tree-item {
                     flex-shrink: 0;
                     font-size: 28rpx;
                     color: #333333;
                     display: flex;
                     align-items: center;
+
                     .special {
                         color: #1677FF;
                     }
+
                     .right-text {
                         color: #333333;
                         margin: 0 16rpx 6rpx;
                     }
+
                     .right-icon {
                         width: 36rpx;
                         height: 36rpx;
@@ -326,9 +336,11 @@
         .content {
             padding: 0 36rpx;
             background-color: white;
+
             .dept-list {
                 display: flex;
                 flex-direction: column;
+
                 .dept-list-item {
                     font-size: 28rpx;
                     padding: 30rpx 0;
@@ -336,6 +348,7 @@
                     align-items: center;
                     justify-content: flex-start;
                     border-top: 1rpx solid #EEEEEE;
+
                     .checkbox {
                         width: 36rpx;
                         height: 36rpx;
@@ -346,15 +359,18 @@
                         align-items: center;
                         justify-content: center;
                         box-sizing: border-box;
+
                         &.active {
                             border-color: #1677FF;
                             background-color: #1677FF;
                         }
                     }
+
                     .check-icon {
                         width: 36rpx;
                         height: 36rpx;
                     }
+
                     .text {
                         flex: 1;
                         margin-left: 36rpx;
@@ -362,11 +378,13 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                     }
+
                     .more-icon {
                         width: 40rpx;
                         height: 40rpx;
                         margin-right: 15rpx;
                     }
+
                     .more-text {
                         color: #919191;
                     }
@@ -378,5 +396,6 @@
             width: 100%;
             height: 200rpx;
         }
+
     }
 </style>
