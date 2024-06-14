@@ -47,6 +47,12 @@ export default {
 | checkIcon | String | '' | 数据勾选时的icon展示 |
 | moreIcon | String | '' | 当前节点存在字节点时的icon展示 |
 
+#### Methods 组件内方法
+
+| 方法名 | 说明 | 参数 | 使用 |
+| ------ | ------ | ------ | ------ |
+| getFilterData(keyword, treeData) | 根据关键词模糊查询，返回一维数组格式的节点集 | `keyword`：关键词，对应各节点的`labelField`字段。 `treeData`：树形结构数据(不传则默认为`treeData`) | this.$refs.strCascade.getFilterData('一级') |
+
 #### Notes 注意事项
 
   - 该组件尚不支持父子节点联动选中。
